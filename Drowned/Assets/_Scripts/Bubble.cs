@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Bubble : MonoBehaviour,IPoolable
 {
     //Poolable Initiator
     PoolObject _poolObject;
-
-    [HideInInspector] public Vector3 TargetPos;
 
     [HideInInspector] public float ScaleFactor;
     [HideInInspector] public float SpeedFactor;
@@ -24,6 +23,8 @@ public class Bubble : MonoBehaviour,IPoolable
 
     Rigidbody _rb;
 
+    VisualEffect _effect;
+
     private void Awake()
     {
         TryGetComponent(out _poolObject);
@@ -32,31 +33,38 @@ public class Bubble : MonoBehaviour,IPoolable
         _initialScale = transform.localScale;
 
         _poolObject.OnPulledFromPool += OnPulledFromPool;
+
+        _effect = GetComponentInChildren<VisualEffect>();
+        _effect.transform.parent = null;
+    }
+
+    void Update()
+    {
+        _effect.transform.position = transform.position;
     }
 
     public void ReturnToPool()
     {
         _rb.velocity = Vector3.zero;
 
-
+        _effect.Stop();
         if (_poolObject == null) Destroy(gameObject); else _poolObject.PushToPool();
     }
 
     public void OnPulledFromPool()
     {
-
-        _rb.AddForce(Vector3.up * _floatForce);
+        _effect.Play();
 
         transform.localScale = _initialScale * ScaleFactor;
         _damages = _initialDamages * DamageFactor;
 
-        _rb.AddForce((TargetPos - transform.position).normalized * _bulletSpeed * SpeedFactor,ForceMode.Impulse);
+        _rb.AddForce(transform.forward * _bulletSpeed * SpeedFactor,ForceMode.Impulse);
     } 
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent<Health>(out Health health)) health.ApplyDamage(DamageFactor);
-        print(_damages);
+
         ReturnToPool();
     }
 }

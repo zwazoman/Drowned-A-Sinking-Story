@@ -104,20 +104,18 @@ public class FloatingFishController : MonoBehaviour
         Vector3 targetPos;
         RaycastHit hit;
 
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit,Mathf.Infinity,_mask))
+        GameObject bubble = PoolManager.Instance.AccessPool(Pools.Bubble).TakeFromPool(_shootSocket.position, Quaternion.identity);
+        bubble.TryGetComponent<Bubble>(out Bubble bubbleScript);
+
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit,Mathf.Infinity,_mask))
         {
-            targetPos = hit.point;
+            bubbleScript.transform.forward = _shootSocket.transform.position - hit.point;
         }
         else
         {
-            targetPos = Vector3.zero; 
+            bubbleScript.transform.forward = Camera.main.transform.forward;
         }
 
-        GameObject bubble = PoolManager.Instance.AccessPool(Pools.Bubble).TakeFromPool(_shootSocket.position, Quaternion.identity);
-
-        bubble.TryGetComponent<Bubble>(out Bubble bubbleScript);
-
-        bubbleScript.TargetPos = targetPos;
         bubbleScript.ScaleFactor = _size;
         bubbleScript.SpeedFactor = _speed;
         bubbleScript.DamageFactor = _damage;
