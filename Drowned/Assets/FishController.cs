@@ -6,12 +6,19 @@ using UnityEngine.InputSystem;
 public class FishController : MonoBehaviour
 {
     Vector2 movementInput;
+
+    [Header("references")]
     [SerializeField] Rigidbody rb1;
     [SerializeField] Rigidbody rb2;
+    [SerializeField] FloatingFishController _aimingControls;
+    
+    [Header("Parameters")]
     [SerializeField] float Sensitivity;
     [SerializeField] float gravity;
     public void Rotate(InputAction.CallbackContext ctx)
     {
+        if (!enabled) return;
+
         if (ctx.performed)
         {
             movementInput = ctx.ReadValue<Vector2>() * Sensitivity;
@@ -42,5 +49,27 @@ public class FishController : MonoBehaviour
         */
         rb1.AddForce(Vector3.down * gravity);
         rb2.AddForce(Vector3.down * gravity);
+    }
+
+    public void AlignToCamera()
+    {
+        //rb1.MoveRotation(Quaternion.LookRotation(Camera.main.transform.up,Vector3.up));
+        //rb2.MoveRotation(Quaternion.LookRotation(-Camera.main.transform.up,Vector3.up));
+        rb1.transform.up = Camera.main.transform.forward;
+        rb2.transform.up = -Camera.main.transform.forward;
+    }
+
+    public void SwitchToAim(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            _aimingControls.enabled = true;
+            enabled = false;
+        }
+        else if (ctx.canceled)
+        {
+            _aimingControls.enabled = false;
+            enabled = true;
+        }
     }
 }
