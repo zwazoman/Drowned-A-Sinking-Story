@@ -22,7 +22,7 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
-        salope = Camera.main.transform.localPosition.z;
+        salope = (Camera.main.transform.position - transform.position).magnitude;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -65,14 +65,15 @@ public class CameraController : MonoBehaviour
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(_target.position, -transform.forward, out hit, (Camera.main.transform.position - -_target.position).magnitude,LayerMask.GetMask("Wall")))
+        if(Physics.Raycast(transform.position, -transform.forward, out hit,salope,LayerMask.GetMask("Wall")))
         {
-            Camera.main.transform.position = hit.point;
-            print("suu");
+            print("salope");
+            print(hit.collider.name) ;
+            Camera.main.transform.position = hit.point + transform.forward;
         }
         else
         {
-            Camera.main.transform.localPosition = Vector3.forward * salope;
+            Camera.main.transform.localPosition = Vector3.forward * -salope;
         }
 
     }

@@ -109,7 +109,7 @@ public class FloatingFishController : MonoBehaviour
 
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit,Mathf.Infinity,_mask))
         {
-            bubbleScript.transform.forward = _shootSocket.transform.position - hit.point;
+            bubbleScript.transform.forward =  hit.point - _shootSocket.transform.position;
         }
         else
         {
