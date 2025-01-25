@@ -50,7 +50,7 @@ public class Bubble : MonoBehaviour,IPoolable
         transform.localScale = _initialScale * ScaleFactor;
         _damages = _initialDamages * DamageFactor;
 
-        _rb.AddForce((TargetPos - transform.position).normalized * _bulletSpeed * SpeedFactor);
+        _rb.AddForce((TargetPos - transform.position).normalized * _bulletSpeed * SpeedFactor,ForceMode.Impulse);
     } 
 
     private void OnTriggerEnter(Collider other)

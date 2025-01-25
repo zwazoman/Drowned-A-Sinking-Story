@@ -59,7 +59,7 @@ public class FloatingFishController : MonoBehaviour
             if (_timer < _maxChargeTime && Air != 0)
             {
                 _size += 1f * Time.deltaTime;
-                _speed -= 0.25f * Time.deltaTime;
+                //_speed -= 0.25f * Time.deltaTime;
                 _damage += 1.2f * Time.deltaTime;
                 SetAir(-1f * Time.deltaTime);
                 
