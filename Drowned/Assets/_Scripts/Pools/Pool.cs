@@ -9,7 +9,7 @@ public class Pool : MonoBehaviour
 
     Queue<GameObject> _pool = new Queue<GameObject>();
 
-    void Start()
+    void Awake()
     {
         for(int i = 0; i < _poolSize; i++)
         {
@@ -23,6 +23,7 @@ public class Pool : MonoBehaviour
     /// <returns></returns>
     GameObject AddNewObjectToPool()
     {
+        print(_object.name);
         GameObject pooledObject = Instantiate(_object);
         PoolObject poolObject;
         if (_object.TryGetComponent<PoolObject>(out PoolObject pObject))
