@@ -39,7 +39,7 @@ public class AirBubble : MonoBehaviour,IPoolable
         if((FishController.Instance.rb1.position-transform.position).sqrMagnitude< _MagnetTreshold* _MagnetTreshold)
         {
             Vector3 vel = Vector3.zero;
-            transform.position = Vector3.SmoothDamp(transform.position, FishController.Instance.rb1.position, ref vel, .35f);
+            transform.position = Vector3.SmoothDamp(transform.position, FishController.Instance.rb1.position, ref vel, .05f);
         }
     }
 
