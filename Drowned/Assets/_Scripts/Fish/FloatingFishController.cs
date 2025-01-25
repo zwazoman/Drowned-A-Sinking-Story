@@ -110,7 +110,6 @@ public class FloatingFishController : MonoBehaviour
         }
         else
         {
-            print("bizarre");
             targetPos = Vector3.zero; 
         }
 
