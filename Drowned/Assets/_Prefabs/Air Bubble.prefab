@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _airAmount: 2
-  _MagnetTreshold: 25
+  _MagnetTreshold: 40
 --- !u!114 &2712825228413353434
 MonoBehaviour:
   m_ObjectHideFlags: 0
