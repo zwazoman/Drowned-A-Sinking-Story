@@ -23,7 +23,6 @@ public class Pool : MonoBehaviour
     /// <returns></returns>
     GameObject AddNewObjectToPool()
     {
-        print(_object.name);
         GameObject pooledObject = Instantiate(_object);
         PoolObject poolObject;
         if (_object.TryGetComponent<PoolObject>(out PoolObject pObject))
