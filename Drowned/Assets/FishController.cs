@@ -12,6 +12,8 @@ public class FishController : MonoBehaviour
     [SerializeField] Rigidbody rb1;
     [SerializeField] Rigidbody rb2;
     [SerializeField] FloatingFishController _aimingControls;
+    [SerializeField] FlipFlop _flipflop;
+    [SerializeField] FishVisuals _visuals;
     
     [Header("Parameters")]
     [SerializeField] float Sensitivity;
@@ -34,8 +36,6 @@ public class FishController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
-
         rb1.AddTorque(Vector3.ProjectOnPlane(Vector3.up * movementInput.x , rb1.transform.up), ForceMode.Force);
         rb1.AddTorque(Vector3.Project( Camera.main.transform.right * movementInput.y,rb1.transform.forward) , ForceMode.Force);
 
@@ -56,7 +56,9 @@ public class FishController : MonoBehaviour
     {
         //rb1.MoveRotation(Quaternion.LookRotation(Camera.main.transform.up,Vector3.up));
         //rb2.MoveRotation(Quaternion.LookRotation(-Camera.main.transform.up,Vector3.up));
-        rb1.transform.up = Camera.main.transform.forward;
+
+        rb1.transform.rotation = Quaternion.LookRotation(Vector3.up, Camera.main.transform.forward);
+        //rb1.transform.up = Camera.main.transform.forward;
         //rb2.transform.up = -Camera.main.transform.forward;
     }
 
@@ -65,12 +67,16 @@ public class FishController : MonoBehaviour
         if (ctx.performed)
         {
             _aimingControls.enabled = true;
+            _flipflop.enabled = false;
             enabled = false;
+            _visuals.targetFatness = 100;
         }
         else if (ctx.canceled)
         {
             _aimingControls.enabled = false;
+            _flipflop.enabled = true;
             enabled = true;
+            _visuals.targetFatness = 0;
         }
     }
 

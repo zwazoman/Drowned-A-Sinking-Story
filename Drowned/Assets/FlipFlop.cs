@@ -26,6 +26,11 @@ public class FlipFlop : MonoBehaviour
 
     public void Flip(InputAction.CallbackContext ctx)
     {
+        if (!enabled)
+        {
+            flip = false; return;
+        }
+
         if (ctx.performed)
         {
             flip = true;
@@ -40,6 +45,10 @@ public class FlipFlop : MonoBehaviour
 
     public void Flop(InputAction.CallbackContext ctx)
     {
+        if (!enabled)
+        {
+            flop = false;return;
+        }
         if(ctx.performed)
         {
             Debug.Log("flop");
