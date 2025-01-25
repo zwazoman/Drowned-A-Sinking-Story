@@ -23,6 +23,9 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         salope = Camera.main.transform.localPosition.z;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
