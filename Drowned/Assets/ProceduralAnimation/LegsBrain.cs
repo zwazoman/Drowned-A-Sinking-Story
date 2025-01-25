@@ -15,6 +15,8 @@ public class LegsBrain : MonoBehaviour
     [Header("Movement parameters")]
     [SerializeField] float maxSpeed = 1.0f;
 
+    [SerializeField] LayerMask raycastMask;
+
     private LegController[] legsController;
 
     private void Awake()
@@ -34,6 +36,7 @@ public class LegsBrain : MonoBehaviour
             legController.threshold = minThreshold;
             legController.precision = precision;
             legController.maxSpeed = maxSpeed;
+            legController.raycastMask = raycastMask;
 
             if (centerOfMass != null) legController.setHintPosition(centerOfMass.transform.position);
         }

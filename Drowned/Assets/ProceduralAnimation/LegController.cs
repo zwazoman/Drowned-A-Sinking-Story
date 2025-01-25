@@ -9,16 +9,21 @@ public class LegController : MonoBehaviour
     [SerializeField] GameObject hintGameObject;
     [SerializeField] Transform rootLeg;
 
+    [SerializeField] public Vector3 raycastDirection;
+
     [Header("Overrided by legsBrain :")]
 
     [Header("Trigger parameters")]
     [SerializeField] public float floorDistance = 1.0f;
-    [SerializeField] public float maxThreshold = 0.5f;
+    [SerializeField] public float maxThreshold = 1.0f;
     [SerializeField] public float threshold = 0.5f;
     [SerializeField] public float precision = 0.1f;
 
     [Header("Movement parameters")]
     [SerializeField] public float maxSpeed = 1.0f;
+
+
+    [SerializeField] public LayerMask raycastMask;
 
     // Internal leg
     private Vector3 targetPosition;
@@ -43,7 +48,7 @@ public class LegController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // Avoid exceptions
         if (tipPositionGameObject == null || target == null) return;
@@ -51,9 +56,12 @@ public class LegController : MonoBehaviour
         // Check if the leg need to move
         var distance = (targetPosition - tipPositionGameObject.transform.position).magnitude;
 
-        // TEMPORARY 
-        targetPosition = target.transform.position;
-        // END TEMPORARY
+        RaycastHit hit;
+        if (Physics.Raycast(rootLeg.position, raycastDirection, out hit, 100, raycastMask))
+        {
+            targetPosition = hit.point;
+            Debug.DrawRay(rootLeg.position, raycastDirection * hit.distance, Color.yellow);
+        }
 
         if (distance < precision)
         {
@@ -85,6 +93,9 @@ public class LegController : MonoBehaviour
         if (target != null) Gizmos.DrawSphere(target.transform.position, 0.1f);
 
         Gizmos.color = Color.cyan;
-        if (target != null) Gizmos.DrawSphere(target.transform.position, threshold);
+        if (targetPosition != null) Gizmos.DrawSphere(targetPosition, threshold);
+
+        Gizmos.color = Color.yellow;
+        if (rootLeg != null || raycastDirection != null) Gizmos.DrawLine(rootLeg.position, rootLeg.position + raycastDirection);
     }
 }
