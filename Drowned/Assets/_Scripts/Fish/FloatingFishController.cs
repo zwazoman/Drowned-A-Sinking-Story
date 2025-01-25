@@ -1,4 +1,4 @@
-using System.Collections;
+  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,7 +6,11 @@ using UnityEngine.InputSystem.Controls;
 
 public class FloatingFishController : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] FishController _fishController;
     [SerializeField] Transform _shootSocket;
+
+    [Header("parameters")]
 
     [SerializeField] float _maxChargeTime = 1f;
 
@@ -33,7 +37,8 @@ public class FloatingFishController : MonoBehaviour
 
     private void Update()
     {
-        Aim();
+        if (!enabled) return;
+        _fishController.AlignToCamera();
 
         if (_isShooting)
         {
@@ -43,25 +48,20 @@ public class FloatingFishController : MonoBehaviour
                 _size += 1f * Time.deltaTime;
                 _speed -= 0.25f * Time.deltaTime;
                 _damage += 1.2f * Time.deltaTime;
-                Color singe = new Color(1 + _timer * 5, 1, 1);
-                MR.material.color = singe;
+                //Color singe = new Color(1 + _timer * 5, 1, 1);
+                //MR.material.color = singe;
             }
         }
         else
         {
-            MR.material.color = Color.white;
+            //MR.material.color = Color.white;
             _timer = 0f;
         }
     }
 
-    void Aim()
-    {
-        transform.Rotate(Vector3.up, camVector.x * Time.deltaTime, Space.World);
-        transform.Rotate(Vector3.right, camVector.y * Time.deltaTime, Space.Self);
-    }
-
     public void OnShoot(InputAction.CallbackContext context)
     {
+        if (!enabled) return;
         if (context.performed)
         {
             _isShooting = true;
@@ -75,7 +75,8 @@ public class FloatingFishController : MonoBehaviour
 
     public void OnAim(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (!enabled) return;
+        /*if (ctx.performed)
         {
             camVector = ctx.ReadValue<Vector2>() * -_lookSensitivity;
             camVector.x *= -1;
@@ -83,11 +84,12 @@ public class FloatingFishController : MonoBehaviour
         else if (ctx.canceled)
         {
             camVector = Vector2.zero;
-        }
+        }*/
     }
 
     void Shoot()
     {
+        if (!enabled) return;
         Vector3 targetPos;
         RaycastHit hit;
 
@@ -119,5 +121,7 @@ public class FloatingFishController : MonoBehaviour
         _speed = 1;
         _damage = 1;
     }
+
+
 
 }
