@@ -347,7 +347,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipPositionGameObject: {fileID: 596041660}
   hintGameObject: {fileID: 137784402}
-  rootLeg: {fileID: 748264484}
+  armatureLeg: {fileID: 748264484}
+  rootLeg: {fileID: 1414234641}
   raycastDirection: {x: -0.5, y: -1, z: 0}
   floorDistance: 1
   maxThreshold: 1
@@ -561,7 +562,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipPositionGameObject: {fileID: 1187681370}
   hintGameObject: {fileID: 1650735992}
-  rootLeg: {fileID: 1609817117}
+  armatureLeg: {fileID: 1609817117}
+  rootLeg: {fileID: 368021856}
   raycastDirection: {x: -0.5, y: -1, z: 0}
   floorDistance: 1
   maxThreshold: 0.5
@@ -646,7 +648,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipPositionGameObject: {fileID: 779902378}
   hintGameObject: {fileID: 1011594151}
-  rootLeg: {fileID: 903510797}
+  armatureLeg: {fileID: 903510797}
+  rootLeg: {fileID: 1202284323}
   raycastDirection: {x: 0.5, y: -1, z: 0}
   floorDistance: 1
   maxThreshold: 1
@@ -836,7 +839,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipPositionGameObject: {fileID: 958737462}
   hintGameObject: {fileID: 46830785}
-  rootLeg: {fileID: 80907426}
+  armatureLeg: {fileID: 80907426}
+  rootLeg: {fileID: 598940188}
   raycastDirection: {x: -0.5, y: -1, z: 0}
   floorDistance: 1
   maxThreshold: 1
@@ -1343,7 +1347,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipPositionGameObject: {fileID: 914957173}
   hintGameObject: {fileID: 1614009849}
-  rootLeg: {fileID: 284060416}
+  armatureLeg: {fileID: 284060416}
+  rootLeg: {fileID: 1844646067}
   raycastDirection: {x: 0.5, y: -1, z: 0}
   floorDistance: 1
   maxThreshold: 1
@@ -2422,7 +2427,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipPositionGameObject: {fileID: 1264136521}
   hintGameObject: {fileID: 638689601}
-  rootLeg: {fileID: 940214723}
+  armatureLeg: {fileID: 940214723}
+  rootLeg: {fileID: 593772870}
   raycastDirection: {x: 0.5, y: -1, z: 0}
   floorDistance: 1
   maxThreshold: 1
@@ -2562,7 +2568,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipPositionGameObject: {fileID: 691014394}
   hintGameObject: {fileID: 1963722271}
-  rootLeg: {fileID: 1532419482}
+  armatureLeg: {fileID: 1532419482}
+  rootLeg: {fileID: 609117999}
   raycastDirection: {x: 0.5, y: -1, z: 0}
   floorDistance: 1
   maxThreshold: 1
@@ -3092,7 +3099,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipPositionGameObject: {fileID: 1076012201}
   hintGameObject: {fileID: 661391459}
-  rootLeg: {fileID: 1454378490}
+  armatureLeg: {fileID: 1454378490}
+  rootLeg: {fileID: 805875535}
   raycastDirection: {x: -0.5, y: -1, z: 0}
   floorDistance: 1
   maxThreshold: 0.5

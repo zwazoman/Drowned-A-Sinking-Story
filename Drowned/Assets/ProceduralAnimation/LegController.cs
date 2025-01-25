@@ -6,6 +6,7 @@ public class LegController : MonoBehaviour
 {
     [SerializeField] GameObject tipPositionGameObject;
     [SerializeField] GameObject hintGameObject;
+    [SerializeField] Transform armatureLeg;
     [SerializeField] Transform rootLeg;
 
     [SerializeField] public Vector3 raycastDirection;
@@ -43,9 +44,9 @@ public class LegController : MonoBehaviour
     public void setHintPosition(Vector3 centerOfMass)
     {
 
-        Debug.DrawLine(rootLeg.position, centerOfMass, Color.blue, 100f);
+        Debug.DrawLine(armatureLeg.position, centerOfMass, Color.blue, 100f);
 
-        hintGameObject.transform.position = centerOfMass + (rootLeg.position - centerOfMass).normalized * 3f;
+        hintGameObject.transform.position = centerOfMass + (armatureLeg.position - centerOfMass).normalized * 3f;
     }
 
     // Update is called once per frame
@@ -67,10 +68,10 @@ public class LegController : MonoBehaviour
 
         // Update the next targetPosition
         RaycastHit hit;
-        if (Physics.Raycast(rootLeg.position, raycastDirection, out hit, 100, raycastMask))
+        if (Physics.Raycast(armatureLeg.position, rootLeg.rotation * raycastDirection, out hit, 100, raycastMask))
         {
             targetPosition = hit.point;
-            Debug.DrawRay(rootLeg.position, raycastDirection * hit.distance, Color.yellow);
+            Debug.DrawRay(armatureLeg.position, rootLeg.rotation * raycastDirection * hit.distance, Color.yellow);
         }
 
         if (!moving && distance < threshold || distance < precision) return;
@@ -97,6 +98,6 @@ public class LegController : MonoBehaviour
         if (targetPosition != null) Gizmos.DrawWireSphere(targetPosition, threshold);
 
         Gizmos.color = Color.yellow;
-        if (rootLeg != null || raycastDirection != null) Gizmos.DrawLine(rootLeg.position, rootLeg.position + raycastDirection);
+        if (armatureLeg != null && raycastDirection != null && rootLeg != null) Gizmos.DrawLine(armatureLeg.position, armatureLeg.position + rootLeg.rotation * raycastDirection);
     }
 }
