@@ -53,9 +53,9 @@ public class Bubble : MonoBehaviour,IPoolable
         _rb.AddForce((TargetPos - transform.position).normalized * _bulletSpeed * SpeedFactor);
     } 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.TryGetComponent<Health>(out Health health)) health.ApplyDamage(DamageFactor);
+        if (other.gameObject.TryGetComponent<Health>(out Health health)) health.ApplyDamage(DamageFactor);
         print(_damages);
         ReturnToPool();
     }

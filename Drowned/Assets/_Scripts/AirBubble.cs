@@ -6,8 +6,8 @@ public class AirBubble : MonoBehaviour
 {
     [SerializeField] float _airAmount;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.TryGetComponent(out FloatingFishController controller)) controller.SetAir(_airAmount);
+        if (other.gameObject.TryGetComponent(out FloatingFishController controller)) controller.SetAir(_airAmount);
     }
 }
