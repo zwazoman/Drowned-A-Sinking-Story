@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
   _smoothTime: 0.2
-  _sensibility: 140
+  _sensibility: 1
 --- !u!1 &8229857459090014991
 GameObject:
   m_ObjectHideFlags: 0
