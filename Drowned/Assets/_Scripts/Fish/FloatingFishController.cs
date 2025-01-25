@@ -13,11 +13,13 @@ public class FloatingFishController : MonoBehaviour
     [Header("parameters")]
 
     [SerializeField] float _maxChargeTime = 1f;
-    [SerializeField] float _maxAir;
+    public float _maxAir;
 
     [SerializeField] float _floatY = 10;
     [SerializeField] float _MaxFloatAcceleration = 10;
     [SerializeField] float _buoyancy = 10;
+
+    [SerializeField] LayerMask _mask;
 
     bool _isShooting = false;
 
@@ -35,6 +37,7 @@ public class FloatingFishController : MonoBehaviour
     Vector2 camVector;
 
     MeshRenderer MR;
+
 
     private void Awake()
     {
@@ -101,21 +104,18 @@ public class FloatingFishController : MonoBehaviour
         Vector3 targetPos;
         RaycastHit hit;
 
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit,Mathf.Infinity))
+        GameObject bubble = PoolManager.Instance.AccessPool(Pools.Bubble).TakeFromPool(_shootSocket.position, Quaternion.identity);
+        bubble.TryGetComponent<Bubble>(out Bubble bubbleScript);
+
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit,Mathf.Infinity,_mask))
         {
-            targetPos = hit.point;
+            bubbleScript.transform.forward =  hit.point - _shootSocket.transform.position;
         }
         else
         {
-            print("bizarre");
-            targetPos = Vector3.zero; 
+            bubbleScript.transform.forward = Camera.main.transform.forward;
         }
 
-        GameObject bubble = PoolManager.Instance.AccessPool(Pools.Bubble).TakeFromPool(_shootSocket.position, Quaternion.identity);
-
-        bubble.TryGetComponent<Bubble>(out Bubble bubbleScript);
-
-        bubbleScript.TargetPos = targetPos;
         bubbleScript.ScaleFactor = _size;
         bubbleScript.SpeedFactor = _speed;
         bubbleScript.DamageFactor = _damage;

@@ -14,6 +14,7 @@ public enum Sounds
     FishWaterWoosh,
     FishEnlarge,
     FishShoot,
+    FishShootNoAir,
     FishOutOfAir,
 
     //crab
@@ -21,6 +22,10 @@ public enum Sounds
     CrabGrowl,
     CrabShoot,
     CrabClawChop,
+
+    //other
+    BubblePickup,
+    HealthPickup,
 
     //Ambience
     Whale,

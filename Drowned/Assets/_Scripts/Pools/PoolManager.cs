@@ -3,7 +3,8 @@ using UnityEngine;
 
 public enum Pools
 {
-    Bubble
+    Bubble,
+    AirBubble,
 }
 
 /// <summary>
