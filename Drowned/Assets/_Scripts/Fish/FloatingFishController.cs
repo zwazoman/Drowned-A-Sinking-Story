@@ -19,6 +19,8 @@ public class FloatingFishController : MonoBehaviour
     [SerializeField] float _MaxFloatAcceleration = 10;
     [SerializeField] float _buoyancy = 10;
 
+    [SerializeField] LayerMask _mask;
+
     bool _isShooting = false;
 
     [HideInInspector] public float Air;
@@ -35,6 +37,7 @@ public class FloatingFishController : MonoBehaviour
     Vector2 camVector;
 
     MeshRenderer MR;
+
 
     private void Awake()
     {
@@ -101,7 +104,7 @@ public class FloatingFishController : MonoBehaviour
         Vector3 targetPos;
         RaycastHit hit;
 
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit,Mathf.Infinity))
+        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit,Mathf.Infinity,_mask))
         {
             targetPos = hit.point;
         }
