@@ -184,7 +184,7 @@
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
-    "m_RenderFace": 2,
+    "m_RenderFace": 0,
     "m_AlphaClip": true,
     "m_CastShadows": true,
     "m_ReceiveShadows": true,
@@ -769,10 +769,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -413.0,
-            "y": 213.0,
+            "x": -825.5999755859375,
+            "y": 228.00001525878907,
             "width": 208.0,
-            "height": 435.0
+            "height": 432.00006103515627
         }
     },
     "m_Slots": [
@@ -878,10 +878,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -608.0,
-            "y": 329.0,
-            "width": 139.0,
-            "height": 34.0
+            "x": -1025.60009765625,
+            "y": 292.0000305175781,
+            "width": 138.4000244140625,
+            "height": 33.599945068359378
         }
     },
     "m_Slots": [
