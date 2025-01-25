@@ -33,6 +33,9 @@ public class CameraController : MonoBehaviour
     {
         transform.position = Vector3.SmoothDamp(transform.position, _target.position, ref vel, _smoothTime);
 
+        rotX += cameraInput.x * _sensibility;
+        rotY += -cameraInput.y * _sensibility;
+
         rotY = Mathf.Clamp(rotY, -90f, 90f);
 
         transform.rotation = Quaternion.Euler(rotY, transform.rotation.eulerAngles.y, 0);
@@ -48,10 +51,9 @@ public class CameraController : MonoBehaviour
     {
         if(ctx.performed)
         {
-            //cameraInput = ctx.ReadValue<Vector2>() * - _sensibility;
+            cameraInput = ctx.ReadValue<Vector2>() * - _sensibility;
             //cameraInput.x *= -1;
-            rotX += ctx.ReadValue<Vector2>().x * _sensibility;
-            rotY += -ctx.ReadValue<Vector2>().y * _sensibility;
+            
         }else if ( ctx.canceled)
         {
             cameraInput = Vector2.zero;

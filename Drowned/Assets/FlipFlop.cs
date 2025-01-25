@@ -34,7 +34,6 @@ public class FlipFlop : MonoBehaviour
         if (ctx.performed)
         {
             flip = true;
-            Debug.Log("flip");
         }
         else if (ctx.canceled)
         {
@@ -51,7 +50,6 @@ public class FlipFlop : MonoBehaviour
         }
         if(ctx.performed)
         {
-            Debug.Log("flop");
 
             flop = true;            
         }
