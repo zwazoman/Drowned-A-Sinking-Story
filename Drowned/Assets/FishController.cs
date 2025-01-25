@@ -9,6 +9,7 @@ public class FishController : MonoBehaviour
     [SerializeField] Rigidbody rb1;
     [SerializeField] Rigidbody rb2;
     [SerializeField] float Sensitivity;
+    [SerializeField] float gravity;
     public void Rotate(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
@@ -25,11 +26,21 @@ public class FishController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //rb1.MoveRotation()
-        rb1.transform.Rotate(Vector3.up, movementInput.x * Time.deltaTime, Space.World);
-        rb1.transform.Rotate(Camera.main.transform.right, movementInput.y * Time.deltaTime, Space.Self);
 
-        rb2.transform.Rotate(Vector3.up, movementInput.x * Time.deltaTime, Space.World);
-        rb2.transform.Rotate(Camera.main.transform.right, movementInput.y * Time.deltaTime, Space.Self);
+
+        rb1.AddTorque(Vector3.ProjectOnPlane(Vector3.up * movementInput.x , rb1.transform.up), ForceMode.Force);
+        rb1.AddTorque(Vector3.Project( Camera.main.transform.right * movementInput.y,rb1.transform.forward) , ForceMode.Force);
+
+        rb2.AddTorque(Vector3.ProjectOnPlane(Vector3.up * movementInput.x,rb2.transform.up), ForceMode.Force);
+        rb2.AddTorque(Vector3.Project(Camera.main.transform.right * movementInput.y, rb2.transform.forward), ForceMode.Force);
+
+        /*rb2.MoveRotation(Quaternion.Euler(Vector3.up * movementInput.x * Time.deltaTime) * rb2.rotation);
+        rb2.MoveRotation(Quaternion.Euler(Camera.main.transform.right* movementInput.y * Time.deltaTime) * rb2.rotation);
+
+        rb1.MoveRotation(Quaternion.Euler(Vector3.up * movementInput.x * Time.deltaTime) * rb1.rotation);
+        rb1.MoveRotation(Quaternion.Euler(Camera.main.transform.right * movementInput.y * Time.deltaTime) * rb1.rotation);
+        */
+        rb1.AddForce(Vector3.down * gravity);
+        rb2.AddForce(Vector3.down * gravity);
     }
 }
