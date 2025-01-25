@@ -7,20 +7,18 @@ public class AirBubble : MonoBehaviour,IPoolable
     [SerializeField] float _airAmount;
     [SerializeField] float _MagnetTreshold = 25;
 
-
-
     PoolObject _poolObject;
 
     private void Awake()
     {
-        _poolObject.OnPulledFromPool += OnPulledFromPool;
+        TryGetComponent(out _poolObject);
 
-        TryGetComponent( out _poolObject);
+        _poolObject.OnPulledFromPool += OnPulledFromPool;
     }
 
     public void OnPulledFromPool()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public void ReturnToPool()
