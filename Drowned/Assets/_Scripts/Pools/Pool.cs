@@ -34,7 +34,6 @@ public class Pool : MonoBehaviour
             poolObject = pooledObject.AddComponent<PoolObject>();
         }
         poolObject.OriginPool = this;
-        print(poolObject.OriginPool);
         ReturnToPool(pooledObject);
         return pooledObject;
     }

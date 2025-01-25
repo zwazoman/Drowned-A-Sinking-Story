@@ -228,6 +228,17 @@
                 },
                 {
                     "name": "",
+                    "id": "d8fd809b-4e46-4f8a-8823-f88055089284",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "3d0171db-3d18-4aa2-90f2-2e7c390854d1",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
@@ -239,8 +250,30 @@
                 },
                 {
                     "name": "",
+                    "id": "8d84b17d-1812-4338-af78-86871f064ea5",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "3fc97c33-246d-4504-a012-ae15f3f681b6",
                     "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Enlarge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "670a2782-16ed-4133-a5b6-dd2602d34f82",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
