@@ -147,8 +147,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c6d48446a88234ba69f2f4bee53dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {x: 0, y: 0, z: 0}
+  TargetPos: {x: 0, y: 0, z: 0}
+  ScaleFactor: 0
+  SpeedFactor: 0
+  DamageFactor: 0
   _bulletSpeed: 1000
+  _initialDamages: 1
+  _floatForce: 0
 --- !u!114 &-1783314366936960764
 MonoBehaviour:
   m_ObjectHideFlags: 0

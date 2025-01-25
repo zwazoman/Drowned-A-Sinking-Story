@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class FloatingFishController : MonoBehaviour
 {
     [SerializeField] Transform _shootSocket;
+
+    [SerializeField] float _maxChargeTime = 1f;
+
+    [SerializeField] float _lookSensitivity = 100;
 
     bool _isShooting = false;
 
@@ -14,15 +19,45 @@ public class FloatingFishController : MonoBehaviour
     float _speed = 1;
     float _damage = 1;
 
+    float _timer = 0f;
+
+    Vector2 camVector;
+
+    MeshRenderer MR;
+
+    private void Awake()
+    {
+        TryGetComponent(out MR);
+    }
+
 
     private void Update()
     {
+        Aim();
+
         if (_isShooting)
         {
-            _size += 0.1f;
-            _speed -= 20f;
-            _damage += 0.1f;
+            _timer += Time.deltaTime;
+            if (_timer < _maxChargeTime)
+            {
+                _size += 1f * Time.deltaTime;
+                _speed -= 0.25f * Time.deltaTime;
+                _damage += 1.2f * Time.deltaTime;
+                Color singe = new Color(1 + _timer * 5, 1, 1);
+                MR.material.color = singe;
+            }
         }
+        else
+        {
+            MR.material.color = Color.white;
+            _timer = 0f;
+        }
+    }
+
+    void Aim()
+    {
+        transform.Rotate(Vector3.up, camVector.x * Time.deltaTime, Space.World);
+        transform.Rotate(Vector3.right, camVector.y * Time.deltaTime, Space.Self);
     }
 
     public void OnShoot(InputAction.CallbackContext context)
@@ -33,8 +68,21 @@ public class FloatingFishController : MonoBehaviour
         }
         if (context.canceled)
         {
-            ResetBubble();
             Shoot();
+            ResetBubble();
+        }
+    }
+
+    public void OnAim(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            camVector = ctx.ReadValue<Vector2>() * -_lookSensitivity;
+            camVector.x *= -1;
+        }
+        else if (ctx.canceled)
+        {
+            camVector = Vector2.zero;
         }
     }
 
@@ -43,9 +91,7 @@ public class FloatingFishController : MonoBehaviour
         Vector3 targetPos;
         RaycastHit hit;
 
-        Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
-
-        if(Physics.Raycast(ray, out hit))
+        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit,Mathf.Infinity))
         {
             targetPos = hit.point;
         }
@@ -56,12 +102,13 @@ public class FloatingFishController : MonoBehaviour
         }
 
         GameObject bubble = PoolManager.Instance.AccessPool(Pools.Bubble).TakeFromPool(_shootSocket.position, Quaternion.identity);
+
         bubble.TryGetComponent<Bubble>(out Bubble bubbleScript);
 
-        bubbleScript.Target = targetPos;
-        bubbleScript.Size = _size;
-        bubbleScript.Speed = _speed;
-        bubbleScript.Damage = _damage;
+        bubbleScript.TargetPos = targetPos;
+        bubbleScript.ScaleFactor = _size;
+        bubbleScript.SpeedFactor = _speed;
+        bubbleScript.DamageFactor = _damage;
     }
 
     void ResetBubble()

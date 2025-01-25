@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,6 +34,7 @@ public class Pool : MonoBehaviour
             poolObject = pooledObject.AddComponent<PoolObject>();
         }
         poolObject.OriginPool = this;
+        print(poolObject.OriginPool);
         ReturnToPool(pooledObject);
         return pooledObject;
     }
@@ -68,8 +70,15 @@ public class Pool : MonoBehaviour
         pooledObject.transform.position = pos;
         pooledObject.transform.rotation = rot;
         pooledObject.SetActive(true);
-        pooledObject.GetComponent<PoolObject>().PullFromPool();
+        StartCoroutine(Singe(pooledObject));
+        //pooledObject.GetComponent<PoolObject>().PullFromPool();
         return pooledObject;
+    }
+
+    IEnumerator Singe(GameObject pooledObject)
+    { 
+        yield return null;
+        pooledObject.GetComponent<PoolObject>().PullFromPool();
     }
 
     /// <summary>

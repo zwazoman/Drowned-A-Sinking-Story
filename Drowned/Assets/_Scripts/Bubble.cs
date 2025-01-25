@@ -8,13 +8,19 @@ public class Bubble : MonoBehaviour,IPoolable
     //Poolable Initiator
     PoolObject _poolObject;
 
-    [HideInInspector] public Vector3 Target;
+    [HideInInspector] public Vector3 TargetPos;
 
-    [HideInInspector] public float Size;
-    [HideInInspector] public float Speed;
-    [HideInInspector] public float Damage;
+    [HideInInspector] public float ScaleFactor;
+    [HideInInspector] public float SpeedFactor;
+    [HideInInspector] public float DamageFactor;
 
     [SerializeField] float _bulletSpeed;
+    [SerializeField] float _initialDamages;
+
+    [SerializeField] float _floatForce;
+
+    Vector3 _initialScale;
+    float _damages;
 
     Rigidbody _rb;
 
@@ -22,31 +28,36 @@ public class Bubble : MonoBehaviour,IPoolable
     {
         TryGetComponent(out _poolObject);
         TryGetComponent(out _rb);
-    }
 
-    private void Start()
-    {
+        _initialScale = transform.localScale;
+
         _poolObject.OnPulledFromPool += OnPulledFromPool;
-
-        transform.LookAt(Target);
-
-        _rb.AddForce(transform.forward.normalized * _bulletSpeed);
     }
 
     public void ReturnToPool()
     {
+        _rb.velocity = Vector3.zero;
+
+
         if (_poolObject == null) Destroy(gameObject); else _poolObject.PushToPool();
     }
 
     public void OnPulledFromPool()
     {
-        print("connard");
-    } 
+        //demander a Nathan
 
+        _rb.AddForce(Vector3.up * _floatForce);
+
+        transform.localScale = _initialScale * ScaleFactor;
+        _damages = _initialDamages * DamageFactor;
+
+        _rb.AddForce((TargetPos - transform.position).normalized * _bulletSpeed * SpeedFactor);
+    } 
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent<Health>(out Health health)) health.ApplyDamage(Damage);
+        if (collision.gameObject.TryGetComponent<Health>(out Health health)) health.ApplyDamage(DamageFactor);
+        print(_damages);
         ReturnToPool();
     }
 }
