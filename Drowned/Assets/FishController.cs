@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
 
 public class FishController : MonoBehaviour
@@ -72,4 +73,13 @@ public class FishController : MonoBehaviour
             enabled = true;
         }
     }
+
+    public void FloatTo ( float targetY,float acceleration,float buoyancy)
+    {
+        float force = Mathf.Max( targetY-rb1.transform.position.y,0);
+        force = Mathf.Clamp(force , -acceleration, acceleration)* buoyancy;
+        rb1.AddForce(force*Vector3.up);
+        rb2.AddForce(force*Vector3.up);
+    }
+
 }

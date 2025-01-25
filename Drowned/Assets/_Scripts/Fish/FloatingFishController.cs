@@ -15,11 +15,13 @@ public class FloatingFishController : MonoBehaviour
     [SerializeField] float _maxChargeTime = 1f;
     [SerializeField] float _maxAir;
 
-    [SerializeField] float _lookSensitivity = 100;
+    [SerializeField] float _floatY = 10;
+    [SerializeField] float _MaxFloatAcceleration = 10;
+    [SerializeField] float _buoyancy = 10;
 
     bool _isShooting = false;
 
-     [HideInInspector] public float Air;
+    [HideInInspector] public float Air;
 
     //Bullet parameters
     float _size = 1;
@@ -41,6 +43,10 @@ public class FloatingFishController : MonoBehaviour
         Air = _maxAir;
     }
 
+    private void FixedUpdate()
+    {
+        _fishController.FloatTo(_floatY,_MaxFloatAcceleration, _buoyancy);
+    }
 
     private void Update()
     {
@@ -56,8 +62,7 @@ public class FloatingFishController : MonoBehaviour
                 _speed -= 0.25f * Time.deltaTime;
                 _damage += 1.2f * Time.deltaTime;
                 SetAir(-1f * Time.deltaTime);
-                Color singe = new Color(1 + _timer * 5, 1, 1);
-                MR.material.color = singe;
+                
             }
         }
         else
