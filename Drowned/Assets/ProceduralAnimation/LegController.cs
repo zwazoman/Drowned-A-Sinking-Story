@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LegController : MonoBehaviour
 {
-    [SerializeField] GameObject target;
     [SerializeField] GameObject tipPositionGameObject;
     [SerializeField] GameObject hintGameObject;
     [SerializeField] Transform rootLeg;
@@ -22,17 +21,18 @@ public class LegController : MonoBehaviour
     [Header("Movement parameters")]
     [SerializeField] public float maxSpeed = 1.0f;
 
-
     [SerializeField] public LayerMask raycastMask;
 
     // Internal leg
     private Vector3 targetPosition;
     private Vector3 tipPosition;
 
-    private bool moving = false;
+    public bool moving = false;
     private Vector3 startVector;
     private float startTime;
     private float endTime;
+
+    public bool canMove = false;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +42,7 @@ public class LegController : MonoBehaviour
 
     public void setHintPosition(Vector3 centerOfMass)
     {
+
         Debug.DrawLine(rootLeg.position, centerOfMass, Color.blue, 100f);
 
         hintGameObject.transform.position = centerOfMass + (rootLeg.position - centerOfMass).normalized * 3f;
@@ -51,7 +52,7 @@ public class LegController : MonoBehaviour
     void FixedUpdate()
     {
         // Avoid exceptions
-        if (tipPositionGameObject == null || target == null) return;
+        if (tipPositionGameObject == null || targetPosition == null) return;
 
         // Check if the leg need to move
         var distance = (targetPosition - tipPositionGameObject.transform.position).magnitude;
@@ -73,12 +74,13 @@ public class LegController : MonoBehaviour
 
         if (!moving && distance < threshold || distance < precision) return;
 
+        if (canMove && !moving) return;
+
         if (!moving)
         {
             startTime = Time.time;
             endTime = Time.time + distance / maxSpeed;
             startVector = tipPositionGameObject.transform.position;
-            targetPosition = target.transform.position;
             moving = true;
         }
 
@@ -89,11 +91,8 @@ public class LegController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
-        if (target != null) Gizmos.DrawSphere(target.transform.position, 0.1f);
-
         Gizmos.color = Color.cyan;
-        if (targetPosition != null) Gizmos.DrawSphere(targetPosition, threshold);
+        if (targetPosition != null) Gizmos.DrawWireSphere(targetPosition, threshold);
 
         Gizmos.color = Color.yellow;
         if (rootLeg != null || raycastDirection != null) Gizmos.DrawLine(rootLeg.position, rootLeg.position + raycastDirection);

@@ -9,7 +9,8 @@ public class LegsBrain : MonoBehaviour
 
     [Header("Trigger parameters")]
     [SerializeField] float floorDistance = 1.0f;
-    [SerializeField] float minThreshold = 0.5f;
+    [SerializeField] float threshold = 0.5f;
+    [SerializeField] float maxThreshold = 1.0f;
     [SerializeField] float precision = 0.1f;
 
     [Header("Movement parameters")]
@@ -18,6 +19,9 @@ public class LegsBrain : MonoBehaviour
     [SerializeField] LayerMask raycastMask;
 
     private LegController[] legsController;
+    private int currentBatchMoving = 0;
+
+    private HashSet<int> hasMoved = new HashSet<int>();
 
     private void Awake()
     {
@@ -30,23 +34,49 @@ public class LegsBrain : MonoBehaviour
         if (rootGameObjectLegs != null) legsController = rootGameObjectLegs?.GetComponentsInChildren<LegController>();
         else legsController = GetComponentsInChildren<LegController>();
 
+        updateLegsController();
+    }
+
+    private void OnValidate()
+    {
+        updateLegsController();
+    }
+
+    void updateLegsController()
+    {
+        if (legsController == null) return;
         foreach (var legController in legsController)
         {
             legController.floorDistance = floorDistance;
-            legController.threshold = minThreshold;
+            legController.threshold = threshold;
             legController.precision = precision;
             legController.maxSpeed = maxSpeed;
             legController.raycastMask = raycastMask;
 
             if (centerOfMass != null) legController.setHintPosition(centerOfMass.transform.position);
         }
-
-        //if (rootGameObjectLegs != null) rootGameObjectLegs.transform.parent = null;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Allow leg to move or not
+
+        var time = Time.time;
+
+        for (int i = 0; i < legsController.Length; i++)
+        {
+            if (legsController[i].moving) hasMoved.Add(i);
+        }
+
+        if (hasMoved.Count < 4) return;
+
+        for (int i = 0; i < legsController.Length; i++)
+        {
+            legsController[i].canMove = i % 2 == currentBatchMoving;
+        }
+
+        currentBatchMoving = (currentBatchMoving + 1) % 2;
 
     }
 
