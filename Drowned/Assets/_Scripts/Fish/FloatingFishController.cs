@@ -9,10 +9,13 @@ public class FloatingFishController : MonoBehaviour
     [SerializeField] Transform _shootSocket;
 
     [SerializeField] float _maxChargeTime = 1f;
+    [SerializeField] float _maxAir;
 
     [SerializeField] float _lookSensitivity = 100;
 
     bool _isShooting = false;
+
+     [HideInInspector] public float Air;
 
     //Bullet parameters
     float _size = 1;
@@ -21,6 +24,8 @@ public class FloatingFishController : MonoBehaviour
 
     float _timer = 0f;
 
+    bool _shouldShoot = true;
+
     Vector2 camVector;
 
     MeshRenderer MR;
@@ -28,6 +33,8 @@ public class FloatingFishController : MonoBehaviour
     private void Awake()
     {
         TryGetComponent(out MR);
+
+        Air = _maxAir;
     }
 
 
@@ -38,11 +45,12 @@ public class FloatingFishController : MonoBehaviour
         if (_isShooting)
         {
             _timer += Time.deltaTime;
-            if (_timer < _maxChargeTime)
+            if (_timer < _maxChargeTime && Air != 0)
             {
                 _size += 1f * Time.deltaTime;
                 _speed -= 0.25f * Time.deltaTime;
                 _damage += 1.2f * Time.deltaTime;
+                SetAir(-1f * Time.deltaTime);
                 Color singe = new Color(1 + _timer * 5, 1, 1);
                 MR.material.color = singe;
             }
@@ -64,10 +72,18 @@ public class FloatingFishController : MonoBehaviour
     {
         if (context.performed)
         {
+            print(Air);
+            if (Air == 0)
+            {
+                _shouldShoot = false;
+                return;
+            }
+            _shouldShoot = true;
             _isShooting = true;
         }
         if (context.canceled)
         {
+            if (!_shouldShoot) return;
             Shoot();
             ResetBubble();
         }
@@ -111,6 +127,12 @@ public class FloatingFishController : MonoBehaviour
         bubbleScript.DamageFactor = _damage;
     }
 
+    public void SetAir(float amount)
+    {
+        Air += amount;
+        Air = Mathf.Clamp(Air, 0, _maxAir);
+    }
+
     void ResetBubble()
     {
         _isShooting = false;
@@ -119,5 +141,4 @@ public class FloatingFishController : MonoBehaviour
         _speed = 1;
         _damage = 1;
     }
-
 }

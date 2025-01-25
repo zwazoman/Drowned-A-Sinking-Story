@@ -44,7 +44,6 @@ public class Bubble : MonoBehaviour,IPoolable
 
     public void OnPulledFromPool()
     {
-        //demander a Nathan
 
         _rb.AddForce(Vector3.up * _floatForce);
 
