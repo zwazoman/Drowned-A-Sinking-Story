@@ -11,7 +11,7 @@ public class FishController : MonoBehaviour
     [Header("references")]
     public Rigidbody rb1;
     [SerializeField] Rigidbody rb2;
-    [SerializeField] FloatingFishController _aimingControls;
+    public FloatingFishController _aimingControls;
     [SerializeField] FlipFlop _flipflop;
     [SerializeField] FishVisuals _visuals;
     

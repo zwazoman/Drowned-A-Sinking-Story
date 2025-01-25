@@ -13,7 +13,7 @@ public class FloatingFishController : MonoBehaviour
     [Header("parameters")]
 
     [SerializeField] float _maxChargeTime = 1f;
-    [SerializeField] float _maxAir;
+    public float _maxAir;
 
     [SerializeField] float _floatY = 10;
     [SerializeField] float _MaxFloatAcceleration = 10;
