@@ -57,13 +57,6 @@ public class LegController : MonoBehaviour
         // Check if the leg need to move
         var distance = (targetPosition - tipPositionGameObject.transform.position).magnitude;
 
-        RaycastHit hit;
-        if (Physics.Raycast(rootLeg.position, raycastDirection, out hit, 100, raycastMask))
-        {
-            targetPosition = hit.point;
-            Debug.DrawRay(rootLeg.position, raycastDirection * hit.distance, Color.yellow);
-        }
-
         if (distance < precision)
         {
             if (moving) tipPosition = tipPositionGameObject.transform.position;
@@ -72,8 +65,17 @@ public class LegController : MonoBehaviour
 
         tipPositionGameObject.transform.position = tipPosition;
 
+        // Update the next targetPosition
+        RaycastHit hit;
+        if (Physics.Raycast(rootLeg.position, raycastDirection, out hit, 100, raycastMask))
+        {
+            targetPosition = hit.point;
+            Debug.DrawRay(rootLeg.position, raycastDirection * hit.distance, Color.yellow);
+        }
+
         if (!moving && distance < threshold || distance < precision) return;
 
+        // if the leg can't move and deosn't move, avoid updating the leg
         if (canMove && !moving) return;
 
         if (!moving)
