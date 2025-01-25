@@ -9,7 +9,7 @@ public class FishController : MonoBehaviour
     Vector2 movementInput;
 
     [Header("references")]
-    [SerializeField] Rigidbody rb1;
+    public Rigidbody rb1;
     [SerializeField] Rigidbody rb2;
     [SerializeField] FloatingFishController _aimingControls;
     [SerializeField] FlipFlop _flipflop;
@@ -18,6 +18,15 @@ public class FishController : MonoBehaviour
     [Header("Parameters")]
     [SerializeField] float Sensitivity;
     [SerializeField] float gravity;
+
+
+    public static FishController Instance { get; set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public void Rotate(InputAction.CallbackContext ctx)
     {
         if (!enabled) return;
