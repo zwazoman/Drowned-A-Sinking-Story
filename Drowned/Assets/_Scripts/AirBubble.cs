@@ -5,18 +5,22 @@ using UnityEngine;
 public class AirBubble : MonoBehaviour,IPoolable
 {
     [SerializeField] float _airAmount;
+    [SerializeField] float _MagnetTreshold = 25;
+
+
 
     PoolObject _poolObject;
 
     private void Awake()
     {
-        TryGetComponent(out _poolObject);
-
         _poolObject.OnPulledFromPool += OnPulledFromPool;
+
+        TryGetComponent( out _poolObject);
     }
 
     public void OnPulledFromPool()
     {
+        throw new System.NotImplementedException();
     }
 
     public void ReturnToPool()
@@ -29,9 +33,7 @@ public class AirBubble : MonoBehaviour,IPoolable
         if (other.gameObject.TryGetComponent(out FloatingFishController controller))
         {
             controller.SetAir(_airAmount);
-            ReturnToPool();
         }
-
     }
 
     private void Update()
