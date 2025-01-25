@@ -7,6 +7,7 @@ using UnityEngine;
 public class PoolObject : MonoBehaviour
 {
     public event Action OnPulledFromPool;
+    public event Action OnPushedToPool;
 
     public Pool OriginPool;
 
@@ -17,6 +18,8 @@ public class PoolObject : MonoBehaviour
 
     public void PushToPool()
     {
+        OnPushedToPool?.Invoke();
+
         if(OriginPool == null) Destroy(gameObject);
         OriginPool.ReturnToPool(gameObject);
     }

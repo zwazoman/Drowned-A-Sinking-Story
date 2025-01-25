@@ -10,14 +10,13 @@ public class AirBubble : MonoBehaviour,IPoolable
 
     private void Awake()
     {
-        _poolObject.OnPulledFromPool += OnPulledFromPool;
+        TryGetComponent(out _poolObject);
 
-        TryGetComponent( out _poolObject);
+        _poolObject.OnPulledFromPool += OnPulledFromPool;
     }
 
     public void OnPulledFromPool()
     {
-        throw new System.NotImplementedException();
     }
 
     public void ReturnToPool()
@@ -27,6 +26,26 @@ public class AirBubble : MonoBehaviour,IPoolable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out FloatingFishController controller)) controller.SetAir(_airAmount);
+        if (other.gameObject.TryGetComponent(out FloatingFishController controller))
+        {
+            controller.SetAir(_airAmount);
+            ReturnToPool();
+        }
+
+    }
+
+    private void Update()
+    {
+        if((FishController.Instance.rb1.position-transform.position).sqrMagnitude< _MagnetTreshold* _MagnetTreshold)
+        {
+            Vector3 vel = Vector3.zero;
+            transform.position = Vector3.SmoothDamp(transform.position, FishController.Instance.rb1.position, ref vel, .35f);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, _MagnetTreshold);
     }
 }

@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 6971297666186865402}
   - component: {fileID: 2850816873040148651}
   - component: {fileID: 7325856929703091813}
+  - component: {fileID: 2712825228413353434}
   m_Layer: 0
   m_Name: Air Bubble
   m_TagString: Untagged
@@ -249,3 +250,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _airAmount: 2
+  _MagnetTreshold: 25
+--- !u!114 &2712825228413353434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3911523099105399626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10662e3749d97544b9d2fb64143f1463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OriginPool: {fileID: 0}
