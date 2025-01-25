@@ -22,6 +22,7 @@ public class LegsBrain : MonoBehaviour
     private int currentBatchMoving = 0;
 
     private HashSet<int> hasMoved = new HashSet<int>();
+    private bool batchSwitching = false;
 
     private void Awake()
     {
@@ -61,23 +62,24 @@ public class LegsBrain : MonoBehaviour
     void Update()
     {
         // Allow leg to move or not
-
-        var time = Time.time;
-
         for (int i = 0; i < legsController.Length; i++)
         {
             if (legsController[i].moving) hasMoved.Add(i);
+            else if (batchSwitching && !legsController[i].moving) hasMoved.Remove(i);
         }
-
-        if (hasMoved.Count < 4) return;
 
         for (int i = 0; i < legsController.Length; i++)
         {
             legsController[i].canMove = i % 2 == currentBatchMoving;
         }
 
-        currentBatchMoving = (currentBatchMoving + 1) % 2;
+        if (hasMoved.Count == 0 && batchSwitching)
+        {
+            currentBatchMoving = (currentBatchMoving + 1) % 2;
+            batchSwitching = false;
+        }
 
+        if (hasMoved.Count == 4) batchSwitching = true;
     }
 
     private void OnDrawGizmos()
