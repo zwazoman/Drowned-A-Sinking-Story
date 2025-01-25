@@ -56,7 +56,7 @@ public class FishController : MonoBehaviour
         //rb1.MoveRotation(Quaternion.LookRotation(Camera.main.transform.up,Vector3.up));
         //rb2.MoveRotation(Quaternion.LookRotation(-Camera.main.transform.up,Vector3.up));
         rb1.transform.up = Camera.main.transform.forward;
-        rb2.transform.up = -Camera.main.transform.forward;
+        //rb2.transform.up = -Camera.main.transform.forward;
     }
 
     public void SwitchToAim(InputAction.CallbackContext ctx)

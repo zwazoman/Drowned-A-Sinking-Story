@@ -89,19 +89,6 @@ public class FloatingFishController : MonoBehaviour
         }
     }
 
-    public void OnAim(InputAction.CallbackContext ctx)
-    {
-        if (!enabled) return;
-        /*if (ctx.performed)
-        {
-            camVector = ctx.ReadValue<Vector2>() * -_lookSensitivity;
-            camVector.x *= -1;
-        }
-        else if (ctx.canceled)
-        {
-            camVector = Vector2.zero;
-        }*/
-    }
 
     void Shoot()
     {
