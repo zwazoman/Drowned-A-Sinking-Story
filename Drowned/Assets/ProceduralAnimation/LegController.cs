@@ -7,15 +7,20 @@ public class LegController : MonoBehaviour
     [SerializeField] GameObject target;
     [SerializeField] GameObject tipPositionGameObject;
     [SerializeField] GameObject hintGameObject;
+    [SerializeField] Transform rootLeg;
+
+    [Header("Overrided by legsBrain :")]
 
     [Header("Trigger parameters")]
-    [SerializeField] float floorDistance = 1.0f;
-    [SerializeField] float minThreshold = 0.5f;
-    [SerializeField] float precision = 0.1f;
+    [SerializeField] public float floorDistance = 1.0f;
+    [SerializeField] public float maxThreshold = 0.5f;
+    [SerializeField] public float threshold = 0.5f;
+    [SerializeField] public float precision = 0.1f;
 
     [Header("Movement parameters")]
-    [SerializeField] float maxSpeed = 1.0f;
+    [SerializeField] public float maxSpeed = 1.0f;
 
+    // Internal leg
     private Vector3 targetPosition;
     private Vector3 tipPosition;
 
@@ -30,6 +35,13 @@ public class LegController : MonoBehaviour
         if (tipPositionGameObject != null) targetPosition = tipPositionGameObject.transform.position;
     }
 
+    public void setHintPosition(Vector3 centerOfMass)
+    {
+        Debug.DrawLine(rootLeg.position, centerOfMass, Color.blue, 100f);
+
+        hintGameObject.transform.position = centerOfMass + (rootLeg.position - centerOfMass).normalized * 3f;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -42,7 +54,7 @@ public class LegController : MonoBehaviour
         // TEMPORARY 
         targetPosition = target.transform.position;
         // END TEMPORARY
-        
+
         if (distance < precision)
         {
             if (moving) tipPosition = tipPositionGameObject.transform.position;
@@ -51,7 +63,7 @@ public class LegController : MonoBehaviour
 
         tipPositionGameObject.transform.position = tipPosition;
 
-        if (!moving && distance < minThreshold || distance < precision) return;
+        if (!moving && distance < threshold || distance < precision) return;
 
         if (!moving)
         {
@@ -73,6 +85,6 @@ public class LegController : MonoBehaviour
         if (target != null) Gizmos.DrawSphere(target.transform.position, 0.1f);
 
         Gizmos.color = Color.cyan;
-        if (target != null) Gizmos.DrawSphere(target.transform.position, minThreshold);
+        if (target != null) Gizmos.DrawSphere(target.transform.position, threshold);
     }
 }

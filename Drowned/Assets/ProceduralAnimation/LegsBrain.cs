@@ -7,6 +7,14 @@ public class LegsBrain : MonoBehaviour
     [SerializeField] GameObject centerOfMass;
     [SerializeField] GameObject rootGameObjectLegs;
 
+    [Header("Trigger parameters")]
+    [SerializeField] float floorDistance = 1.0f;
+    [SerializeField] float minThreshold = 0.5f;
+    [SerializeField] float precision = 0.1f;
+
+    [Header("Movement parameters")]
+    [SerializeField] float maxSpeed = 1.0f;
+
     private LegController[] legsController;
 
     private void Awake()
@@ -19,6 +27,16 @@ public class LegsBrain : MonoBehaviour
     {
         if (rootGameObjectLegs != null) legsController = rootGameObjectLegs?.GetComponentsInChildren<LegController>();
         else legsController = GetComponentsInChildren<LegController>();
+
+        foreach (var legController in legsController)
+        {
+            legController.floorDistance = floorDistance;
+            legController.threshold = minThreshold;
+            legController.precision = precision;
+            legController.maxSpeed = maxSpeed;
+
+            if (centerOfMass != null) legController.setHintPosition(centerOfMass.transform.position);
+        }
 
         //if (rootGameObjectLegs != null) rootGameObjectLegs.transform.parent = null;
     }
