@@ -68,7 +68,6 @@ public class CrabBehaviour : MonoBehaviour
 
     private void Update()
     {
-
         Vector3 vel = Vector3.zero;
         if (_lookAtPlayer) targetPosition = Vector3.SmoothDamp(targetPosition, _fishHead.transform.position, ref vel, 0.08f); 
         transform.LookAt(targetPosition);

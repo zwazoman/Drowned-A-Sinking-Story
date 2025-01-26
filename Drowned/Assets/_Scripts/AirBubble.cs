@@ -28,9 +28,11 @@ public class AirBubble : MonoBehaviour,IPoolable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out FloatingFishController controller))
+        if (other.gameObject.layer == 6)
         {
-            controller.SetAir(_airAmount);
+            FishController.Instance.gameObject.TryGetComponent(out FloatingFishController floatingFish);
+            floatingFish.SetAir(_airAmount);
+            ReturnToPool();
         }
     }
 

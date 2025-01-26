@@ -10,7 +10,7 @@ public enum Sounds
 {
     //fish
     WaterWhoosh,
-    FishFlipFlop,
+    SandHit,
     FishSplat,
     FishWaterWoosh,
     FishEnlarge,
