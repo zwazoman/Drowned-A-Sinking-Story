@@ -9,7 +9,6 @@ public class PlaySounds : MonoBehaviour
 
     public void PlayPrepareAttck()
     {
-        print("aah");
         AudioManager.Instance.PlaySFXClip(Sounds.CrabPrepareAttack,_prepareAttackVolume);
     }
 

@@ -13,9 +13,12 @@ public class BossHealth : MonoBehaviour
     [SerializeField] List<Health> _weakSpotsList = new List<Health>();
 
     public static event Action OnBossDead;
+    AudioSource _audioSource;
 
     private void Awake()
     {
+        GameObject.Find("Voices").GetComponent<AudioSource>().volume = 1;
+
         _crabHealth = _weakSpotsList.Count;
 
         foreach (Health weakSpot in _weakSpotsList)
@@ -35,6 +38,11 @@ public class BossHealth : MonoBehaviour
         _crabHealth -= 1;
         _healthSlider.value = _crabHealth;
         GetComponentInChildren<CrabBehaviour>().OnDamageTaken();
+
+        if( _crabHealth == 2)
+        {
+
+        }
         if (_crabHealth == 0)
         {
             Die();
