@@ -21,7 +21,7 @@ public class CrabBehaviour : MonoBehaviour
         "atk_laser",
         "atk_shoot",
         "atk_shoot",
-        "atk_opportunity",
+        //"atk_opportunity",
     };
 
     string[] _attaquesDePres = new string[]
@@ -31,7 +31,7 @@ public class CrabBehaviour : MonoBehaviour
         "atk_g",
         "atk_g",
         "atk_f",
-        "atk_opportunity",
+        //"atk_opportunity",
     };
 
     private void Awake()
@@ -44,9 +44,25 @@ public class CrabBehaviour : MonoBehaviour
         StartCoroutine(Play());
     }
 
-
-    IEnumerator Play()
+    public void OnDamageTaken()
     {
+        Debug.LogWarning("trdcytfvugyiguotydfkcvihbojupijygufylkchvlpiyguycgtkvhju");
+        StopAllCoroutines();
+        foreach(string s in _attaquesDeLoin)
+        {
+            _animator.ResetTrigger(s);
+        }
+        foreach (string s in _attaquesDePres)
+        {
+            _animator.ResetTrigger(s);
+        }
+        _animator.SetTrigger("opportunity");
+        StartCoroutine(Play(1));
+    }
+
+    IEnumerator Play(float a = 0)
+    {
+        yield return new WaitForSeconds(a);
         while (isActiveAndEnabled)
         {
             yield return new WaitForSeconds(Random.Range(2,5));
