@@ -303,7 +303,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.0043187547, y: 0.010465858, z: 0.0039330847}
   m_Center: {x: 0.00038426692, y: 0.005958671, z: -0.00012304686}
@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pushForce: 10
-  _damages: 1
+  _damages: 0.5
 --- !u!1 &2171219415074354619
 GameObject:
   m_ObjectHideFlags: 0
@@ -1386,7 +1386,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.002975656, y: 0.012056425, z: 0.0025870523}
   m_Center: {x: 0.00005362706, y: 0.005972212, z: 0.000118895565}
@@ -1402,8 +1402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99f2e13a5ad7b245ba205f72c70efbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pushForce: 1
-  _damages: 1
+  _pushForce: 10
+  _damages: 0.5
 --- !u!1 &5433211497002845641
 GameObject:
   m_ObjectHideFlags: 0
@@ -2339,7 +2339,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.0029041772, y: 0.009680709, z: 0.0037815734}
   m_Center: {x: -0.00027995184, y: 0.0060272603, z: -0.00028240625}
@@ -2355,8 +2355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99f2e13a5ad7b245ba205f72c70efbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pushForce: 1
-  _damages: 1
+  _pushForce: 10
+  _damages: 0.5
 --- !u!1 &8041993261019557520
 GameObject:
   m_ObjectHideFlags: 0
@@ -2749,7 +2749,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.0026917625, y: 0.013077301, z: 0.003235544}
   m_Center: {x: -0.00045185979, y: 0.0061693345, z: 0.000765393}
@@ -2765,8 +2765,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99f2e13a5ad7b245ba205f72c70efbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pushForce: 1
-  _damages: 1
+  _pushForce: 10
+  _damages: 0.5
 --- !u!1 &8882695174224280512
 GameObject:
   m_ObjectHideFlags: 0
