@@ -38,7 +38,7 @@ public class Ambience : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(_fishHead.transform.position, _sphereSize);
+        if(_fishHead!=null) Gizmos.DrawWireSphere(_fishHead.transform.position, _sphereSize);
     }
 
 

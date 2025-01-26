@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CrabBehaviour : MonoBehaviour
@@ -10,6 +11,8 @@ public class CrabBehaviour : MonoBehaviour
 
     [Header("parameters")]
     [SerializeField] private float _rangeAttackTreshold = 200;
+
+    Vector3 targetPosition;
 
     bool _lookAtPlayer;
 
@@ -65,7 +68,9 @@ public class CrabBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if(_lookAtPlayer) transform.LookAt(_fishHead.transform);
+
+        Vector3 vel = Vector3.zero;
+        if (_lookAtPlayer) targetPosition = Vector3.SmoothDamp(targetPosition, _fishHead.transform.position, ref vel, 0.5f);
     }
 
     private void OnDrawGizmosSelected()
