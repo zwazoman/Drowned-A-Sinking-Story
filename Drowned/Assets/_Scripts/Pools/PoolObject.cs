@@ -21,6 +21,9 @@ public class PoolObject : MonoBehaviour
         OnPushedToPool?.Invoke();
 
         if(OriginPool == null) Destroy(gameObject);
-        OriginPool.ReturnToPool(gameObject);
+        else
+        {
+            OriginPool.ReturnToPool(gameObject);
+        }
     }
 }
