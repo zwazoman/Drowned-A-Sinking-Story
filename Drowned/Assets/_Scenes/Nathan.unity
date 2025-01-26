@@ -3037,7 +3037,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Crab Slained
+  m_text: Guillaume Slain
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5035,7 +5035,7 @@ PrefabInstance:
     - target: {fileID: 3449249937801095849, guid: 2fd1d6e05f88ef94481cef6069e2e169,
         type: 3}
       propertyPath: _pushForce
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3502139014773957398, guid: 2fd1d6e05f88ef94481cef6069e2e169,
         type: 3}
@@ -5050,7 +5050,7 @@ PrefabInstance:
     - target: {fileID: 3513654118672791883, guid: 2fd1d6e05f88ef94481cef6069e2e169,
         type: 3}
       propertyPath: _pushForce
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3988676411160728339, guid: 2fd1d6e05f88ef94481cef6069e2e169,
         type: 3}
@@ -5160,7 +5160,7 @@ PrefabInstance:
     - target: {fileID: 4911961116951085957, guid: 2fd1d6e05f88ef94481cef6069e2e169,
         type: 3}
       propertyPath: _pushForce
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5757564306755165357, guid: 2fd1d6e05f88ef94481cef6069e2e169,
         type: 3}
@@ -5330,7 +5330,7 @@ PrefabInstance:
     - target: {fileID: 8394772013905275211, guid: 2fd1d6e05f88ef94481cef6069e2e169,
         type: 3}
       propertyPath: _pushForce
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8434402462819831136, guid: 2fd1d6e05f88ef94481cef6069e2e169,
         type: 3}

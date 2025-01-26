@@ -113,14 +113,14 @@ public class FloatingFishController : MonoBehaviour
         GameObject bubble = PoolManager.Instance.AccessPool(Pools.Bubble).TakeFromPool(_shootSocket.position, Quaternion.identity);
         bubble.TryGetComponent<Bubble>(out Bubble bubbleScript);
 
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit,Mathf.Infinity,_mask))
+        /*if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit,Mathf.Infinity,_mask))
         {
             bubbleScript.transform.forward =  hit.point - _shootSocket.transform.position;
         }
         else
-        {
+        {*/
             bubbleScript.transform.forward = Camera.main.transform.forward;
-        }
+        //}
 
         bubbleScript.ScaleFactor = _size;
         bubbleScript.SpeedFactor = _speed;
