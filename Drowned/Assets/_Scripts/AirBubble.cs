@@ -6,6 +6,7 @@ public class AirBubble : MonoBehaviour,IPoolable
 {
     [SerializeField] float _airAmount;
     [SerializeField] float _MagnetTreshold = 25;
+    public GameObject bubbleExplosionVFX;
 
     PoolObject _poolObject;
 
@@ -23,6 +24,8 @@ public class AirBubble : MonoBehaviour,IPoolable
 
     public void ReturnToPool()
     {
+        Destroy(GameObject.Instantiate(bubbleExplosionVFX, transform.position, Quaternion.identity, null), 5);
+
         if (_poolObject == null) Destroy(gameObject); else _poolObject.PushToPool();
     }
 

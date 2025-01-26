@@ -251,6 +251,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _airAmount: 2
   _MagnetTreshold: 40
+  bubbleExplosionVFX: {fileID: 8001400530414613144, guid: 4cb01eccfa5ded045b2abe17db49ac45,
+    type: 3}
 --- !u!114 &2712825228413353434
 MonoBehaviour:
   m_ObjectHideFlags: 0
