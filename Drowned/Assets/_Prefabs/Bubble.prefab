@@ -274,7 +274,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c6d48446a88234ba69f2f4bee53dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetPos: {x: 0, y: 0, z: 0}
+  bubbleExplosionVFX: {fileID: 8001400530414613144, guid: 4cb01eccfa5ded045b2abe17db49ac45,
+    type: 3}
   ScaleFactor: 0
   SpeedFactor: 0
   DamageFactor: 0

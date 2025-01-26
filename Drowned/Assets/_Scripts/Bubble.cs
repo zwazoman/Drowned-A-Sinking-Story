@@ -9,6 +9,7 @@ public class Bubble : MonoBehaviour,IPoolable
     //Poolable Initiator
     PoolObject _poolObject;
 
+    public GameObject bubbleExplosionVFX;
     [HideInInspector] public float ScaleFactor;
     [HideInInspector] public float SpeedFactor;
     [HideInInspector] public float DamageFactor;
@@ -45,6 +46,10 @@ public class Bubble : MonoBehaviour,IPoolable
 
     public void ReturnToPool()
     {
+
+        Destroy(GameObject.Instantiate(bubbleExplosionVFX,transform.position,Quaternion.identity,null),5);
+        
+
         _rb.velocity = Vector3.zero;
 
         _effect.Stop();
