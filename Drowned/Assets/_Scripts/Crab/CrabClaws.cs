@@ -31,6 +31,7 @@ public class CrabClaws : MonoBehaviour
     {
         if(collision.gameObject.transform.root.TryGetComponent(out Health health))
         {
+            print(health.gameObject);
             Rigidbody rb = health.GetComponentInChildren<Rigidbody>();
             rb.AddForce(collision.impulse * _pushForce, ForceMode.Impulse);
             health.ApplyDamage(_damages);
