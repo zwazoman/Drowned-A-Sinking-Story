@@ -17,12 +17,18 @@ public class LegsBrain : MonoBehaviour
     [SerializeField] float maxSpeed = 1.0f;
 
     [SerializeField] LayerMask raycastMask;
+    [SerializeField] public float raycastDistance = 1.0f;
+    [SerializeField] public float hintDistance = 1.0f;
+
+    [SerializeField] public bool gizmos = true;
+
 
     private LegController[] legsController;
     private int currentBatchMoving = 0;
 
     private HashSet<int> hasMoved = new HashSet<int>();
     private bool batchSwitching = false;
+    private float lastUpdateTime = 0;
 
     private void Awake()
     {
@@ -53,8 +59,11 @@ public class LegsBrain : MonoBehaviour
             legController.precision = precision;
             legController.maxSpeed = maxSpeed;
             legController.raycastMask = raycastMask;
+            legController.raycastDistance = raycastDistance;
+            legController.hintDistance = hintDistance;
 
             if (centerOfMass != null) legController.setHintPosition(centerOfMass.transform.position);
+            legController.gizmos = gizmos;
         }
     }
 
@@ -70,20 +79,22 @@ public class LegsBrain : MonoBehaviour
 
         for (int i = 0; i < legsController.Length; i++)
         {
-            legsController[i].canMove = i % 2 == currentBatchMoving;
+            legsController[i].canMove = i % 2 == currentBatchMoving;// || legsController[i].getTargetDistance() > legsController[i].threshold * 1.2;
         }
 
         if (hasMoved.Count == 0 && batchSwitching)
         {
             currentBatchMoving = (currentBatchMoving + 1) % 2;
             batchSwitching = false;
+            lastUpdateTime = Time.time;
         }
 
-        if (hasMoved.Count == 4) batchSwitching = true;
+        if (hasMoved.Count >= 4 || (Time.time - lastUpdateTime) > 0.25f) batchSwitching = true;
     }
 
     private void OnDrawGizmos()
     {
+        if (!gizmos) return;
         Gizmos.color = Color.yellow;
         if (centerOfMass != null) Gizmos.DrawSphere(centerOfMass.transform.position, 0.1f);
     }

@@ -23,6 +23,10 @@ public class LegController : MonoBehaviour
     [SerializeField] public float maxSpeed = 1.0f;
 
     [SerializeField] public LayerMask raycastMask;
+    [SerializeField] public float raycastDistance = 1.0f;
+    [SerializeField] public float hintDistance = 1.0f;
+
+    [SerializeField] public bool gizmos = true;
 
     // Internal leg
     private Vector3 targetPosition;
@@ -44,9 +48,14 @@ public class LegController : MonoBehaviour
     public void setHintPosition(Vector3 centerOfMass)
     {
 
-        Debug.DrawLine(armatureLeg.position, centerOfMass, Color.blue, 100f);
+        hintGameObject.transform.position = centerOfMass + (armatureLeg.position - centerOfMass).normalized * hintDistance;
 
-        hintGameObject.transform.position = centerOfMass + (armatureLeg.position - centerOfMass).normalized * 3f;
+        Debug.DrawLine(centerOfMass, hintGameObject.transform.position, Color.blue, hintDistance);
+    }
+
+    public float getTargetDistance()
+    {
+        return (targetPosition - tipPositionGameObject.transform.position).magnitude;
     }
 
     // Update is called once per frame
@@ -56,7 +65,7 @@ public class LegController : MonoBehaviour
         if (tipPositionGameObject == null || targetPosition == null) return;
 
         // Check if the leg need to move
-        var distance = (targetPosition - tipPositionGameObject.transform.position).magnitude;
+        var distance = getTargetDistance();
 
         if (distance < precision)
         {
@@ -68,7 +77,7 @@ public class LegController : MonoBehaviour
 
         // Update the next targetPosition
         RaycastHit hit;
-        if (Physics.Raycast(armatureLeg.position, rootLeg.rotation * raycastDirection, out hit, 100, raycastMask))
+        if (Physics.Raycast(armatureLeg.position, rootLeg.rotation * raycastDirection, out hit, raycastDistance, raycastMask))
         {
             targetPosition = hit.point;
             Debug.DrawRay(armatureLeg.position, rootLeg.rotation * raycastDirection * hit.distance, Color.yellow);
@@ -89,11 +98,12 @@ public class LegController : MonoBehaviour
 
         var alpha = Mathf.InverseLerp(startTime, endTime, Time.time);
 
-        tipPositionGameObject.transform.position = Vector3.Lerp(startVector, targetPosition, alpha) + Vector3.up * alpha * (1 - alpha);
+        tipPositionGameObject.transform.position = Vector3.Lerp(startVector, targetPosition, alpha) + Vector3.up * floorDistance * alpha * (1 - alpha);
     }
 
     private void OnDrawGizmos()
     {
+        if (!gizmos) return;
         Gizmos.color = Color.cyan;
         if (targetPosition != null) Gizmos.DrawWireSphere(targetPosition, threshold);
 
