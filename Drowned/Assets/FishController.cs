@@ -75,6 +75,8 @@ public class FishController : MonoBehaviour
     {
         if (ctx.performed)
         {
+            AudioManager.Instance.PlaySFXClip(Sounds.Inflate, 0.5f);
+
             _aimingControls.enabled = true;
             _flipflop.enabled = false;
             enabled = false;

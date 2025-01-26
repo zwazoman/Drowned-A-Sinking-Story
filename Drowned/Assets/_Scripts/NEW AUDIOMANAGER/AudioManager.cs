@@ -13,7 +13,8 @@ public enum Sounds
     SandHit,
     CrabPrepareAttack,
     CrabAttack,
-
+    Inflate,
+    Shoot
 }
 
 public class AudioManager : MonoBehaviour

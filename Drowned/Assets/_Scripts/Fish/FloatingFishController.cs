@@ -30,6 +30,8 @@ public class FloatingFishController : MonoBehaviour
     float _speed = 1;
     float _damage = 1;
 
+    float _volume = 0.3f;
+
     float _timer = 0f;
 
     bool _shouldShoot = true;
@@ -64,6 +66,7 @@ public class FloatingFishController : MonoBehaviour
                 _size += 1f * Time.deltaTime;
                 //_speed -= 0.25f * Time.deltaTime;
                 _damage += 1.2f * Time.deltaTime;
+                _volume += 0.2f * Time.deltaTime;
                 SetAir(-1f * Time.deltaTime);
                 
             }
@@ -101,6 +104,9 @@ public class FloatingFishController : MonoBehaviour
     void Shoot()
     {
         if (!enabled) return;
+
+        AudioManager.Instance.PlaySFXClip(Sounds.Shoot, _volume);
+
         Vector3 targetPos;
         RaycastHit hit;
 
@@ -134,5 +140,7 @@ public class FloatingFishController : MonoBehaviour
         _size = 1;
         _speed = 1;
         _damage = 1;
+
+        _volume = 0.3f;
     }
 }
