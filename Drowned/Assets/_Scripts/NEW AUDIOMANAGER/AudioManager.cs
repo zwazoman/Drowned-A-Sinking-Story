@@ -11,25 +11,8 @@ public enum Sounds
     //fish
     WaterWhoosh,
     SandHit,
-    FishSplat,
-    FishWaterWoosh,
-    FishEnlarge,
-    FishShoot,
-    FishShootNoAir,
-    FishOutOfAir,
-
-    //crab
-    CrabStep,
-    CrabGrowl,
-    CrabShoot,
-    CrabClawChop,
-
-    //other
-    BubblePickup,
-    HealthPickup,
-
-    //Ambience
-    Whale,
+    CrabPrepareAttack,
+    CrabAttack,
 
 }
 
