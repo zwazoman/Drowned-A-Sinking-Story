@@ -2706,7 +2706,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614798}
   m_ExposedName: SizeRange
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 3
   m_Category: Initialize
   m_Min:
     m_Type:
@@ -2858,7 +2858,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614830}
   m_ExposedName: VelocityMultiplier
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 5
   m_Category: Initialize
   m_Min:
     m_Type:
@@ -3171,7 +3171,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614851}
   m_ExposedName: Color
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 1
   m_Category: Output mesh
   m_Min:
     m_Type:
@@ -4297,7 +4297,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615164}
   m_ExposedName: SpawnRate
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 4
   m_Category: Spawn
   m_Min:
     m_Type:
@@ -4377,7 +4377,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615166}
   m_ExposedName: Turbulence intensity
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 2
   m_Category: Update
   m_Min:
     m_Type:
