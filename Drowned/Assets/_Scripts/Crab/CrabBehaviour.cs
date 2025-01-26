@@ -42,6 +42,13 @@ public class CrabBehaviour : MonoBehaviour
     private void Start()
     {
         StartCoroutine(Play());
+        BossHealth.OnBossDead += die;
+    }
+
+    void die()
+    {
+        StopAllCoroutines();
+        _animator.SetTrigger("Die");
     }
 
     public void OnDamageTaken()
