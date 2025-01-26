@@ -20,7 +20,6 @@ public class BodyPart : MonoBehaviour
         {
             rb.AddForce(Vector3.ProjectOnPlane( transform.up,Vector3.up)*ForwardBonusForce,ForceMode.Impulse);
             //Debug.DrawRay(transform.position,Vector3.ProjectOnPlane(transform.up, Vector3.up) * ForwardBonusForce, Color.red,1f);
-            print("bonus");
         }
     }
 }
