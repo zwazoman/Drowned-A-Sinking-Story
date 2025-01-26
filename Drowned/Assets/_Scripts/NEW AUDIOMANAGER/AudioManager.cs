@@ -9,6 +9,7 @@ using UnityEngine;
 public enum Sounds
 {
     //fish
+    WaterWhoosh,
     FishFlipFlop,
     FishSplat,
     FishWaterWoosh,
@@ -29,8 +30,6 @@ public enum Sounds
 
     //Ambience
     Whale,
-
-
 
 }
 
