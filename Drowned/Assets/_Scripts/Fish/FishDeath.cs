@@ -19,6 +19,11 @@ public class FishDeath : MonoBehaviour
         health.OnDie += () => StartCoroutine(Die());
     }
 
+    public void DieBien()
+    {
+        StartCoroutine(Die());
+    }
+
     IEnumerator Die()
     {
         Destroy(GetComponent<PlayerInput>());
