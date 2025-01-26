@@ -67,8 +67,6 @@ public class CameraController : MonoBehaviour
 
         if(Physics.Raycast(transform.position, -transform.forward, out hit,salope,LayerMask.GetMask("Wall")))
         {
-            print("salope");
-            print(hit.collider.name) ;
             Camera.main.transform.position = hit.point + transform.forward;
         }
         else

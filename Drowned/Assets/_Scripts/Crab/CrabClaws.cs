@@ -25,11 +25,13 @@ public class CrabClaws : MonoBehaviour
         _coll.enabled = false;
     }
 
+
+
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.TryGetComponent(out Health health))
+        if(collision.gameObject.transform.root.TryGetComponent(out Health health))
         {
-            TryGetComponent(out Rigidbody rb);
+            Rigidbody rb = health.GetComponentInChildren<Rigidbody>();
             rb.AddForce(collision.impulse * _pushForce, ForceMode.Impulse);
             health.ApplyDamage(_damages);
         }
