@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class BossHealth : MonoBehaviour
     [SerializeField] Slider _healthSlider;
 
     [SerializeField] List<Health> _weakSpotsList = new List<Health>();
+
+    public static event Action OnBossDead;
 
     private void Awake()
     {
@@ -31,6 +34,7 @@ public class BossHealth : MonoBehaviour
     {
         _crabHealth -= 1;
         _healthSlider.value = _crabHealth;
+        GetComponentInChildren<CrabBehaviour>().OnDamageTaken();
         if (_crabHealth == 0)
         {
             Die();
@@ -39,6 +43,7 @@ public class BossHealth : MonoBehaviour
 
     void Die()
     {
+        OnBossDead?.Invoke();
         print("singe");
     }
 }
