@@ -6,10 +6,11 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public event Action OnDie;
+    public event Action<float> OnDamageTaken;
 
-    [SerializeField] int _maxHP;
+    [SerializeField]public int _maxHP;
 
-    float _currentHP;
+    public float _currentHP;
 
     private void Awake()
     {
@@ -19,6 +20,7 @@ public class Health : MonoBehaviour
     public void ApplyDamage(float amount)
     {
         _currentHP -= amount;
+        OnDamageTaken?.Invoke(_currentHP);
         if (_currentHP <= 0) Die();
     }
 

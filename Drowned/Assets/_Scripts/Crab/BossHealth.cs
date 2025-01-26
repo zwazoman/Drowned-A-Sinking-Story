@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossHealth : MonoBehaviour
 {
     int _crabHealth;
+
+    [SerializeField] Slider _healthSlider;
 
     [SerializeField] List<Health> _weakSpotsList = new List<Health>();
 
@@ -18,10 +21,17 @@ public class BossHealth : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _healthSlider.maxValue = _weakSpotsList.Count;
+        _healthSlider.value = _crabHealth;
+    }
+
     void TakeDamage()
     {
         _crabHealth -= 1;
-        if(_crabHealth == 0)
+        _healthSlider.value = _crabHealth;
+        if (_crabHealth == 0)
         {
             Die();
         }
