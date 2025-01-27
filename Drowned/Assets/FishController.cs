@@ -46,10 +46,13 @@ public class FishController : MonoBehaviour
     void FixedUpdate()
     {
         rb1.AddTorque(Vector3.ProjectOnPlane(Vector3.up * movementInput.x , rb1.transform.up), ForceMode.Force);
-        rb1.AddTorque(Vector3.Project( Camera.main.transform.right * movementInput.y,rb1.transform.forward) , ForceMode.Force);
+        rb1.AddTorque(Vector3.ProjectOnPlane( Camera.main.transform.right * movementInput.y,rb1.transform.up) , ForceMode.Force);
 
         rb2.AddTorque(Vector3.ProjectOnPlane(Vector3.up * movementInput.x,rb2.transform.up), ForceMode.Force);
-        rb2.AddTorque(Vector3.Project(Camera.main.transform.right * movementInput.y, rb2.transform.forward), ForceMode.Force);
+        rb2.AddTorque(Vector3.ProjectOnPlane(Camera.main.transform.right * movementInput.y, rb2.transform.up), ForceMode.Force);
+
+
+
 
         /*rb2.MoveRotation(Quaternion.Euler(Vector3.up * movementInput.x * Time.deltaTime) * rb2.rotation);
         rb2.MoveRotation(Quaternion.Euler(Camera.main.transform.right* movementInput.y * Time.deltaTime) * rb2.rotation);

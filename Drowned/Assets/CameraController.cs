@@ -51,7 +51,7 @@ public class CameraController : MonoBehaviour
     {
         if(ctx.performed)
         {
-            cameraInput = ctx.ReadValue<Vector2>() * - _sensibility;
+            cameraInput = ctx.ReadValue<Vector2>() * - _sensibility;            
             //cameraInput.x *= -1;
             
         }else if ( ctx.canceled)
