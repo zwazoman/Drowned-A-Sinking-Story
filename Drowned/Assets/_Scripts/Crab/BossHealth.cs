@@ -44,7 +44,7 @@ public class BossHealth : MonoBehaviour
 
     void TakeDamage()
     {
-        Debug.LogWarning(" boss damage taken");
+        Debug.LogWarning("boss damage taken");
         _crabHealth -= 1;
         _healthSlider.value = _crabHealth;
         GetComponentInChildren<CrabBehaviour>().OnDamageTaken();

@@ -31,7 +31,6 @@ namespace SimpleVFXs
         [Tooltip("Wether the gameObject should Destroy itself after the animation is complete")]
         [SerializeField] private bool _autoDestroy = false;
         [SerializeField] private float _animationDuration = 1;
-        [SerializeField] private float _animationDelay = 0;
         [SerializeField] private AnimationCurve _intensityOverLife;
         [SerializeField] private float _randomness = 1;
 

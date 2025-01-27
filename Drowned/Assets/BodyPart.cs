@@ -5,7 +5,6 @@ using UnityEngine;
 public class BodyPart : MonoBehaviour
 {
     Rigidbody rb;
-    [SerializeField] float treshold = 1f;
     [SerializeField] float ForwardBonusForce = 1f;
 
     [SerializeField] bool ishead;

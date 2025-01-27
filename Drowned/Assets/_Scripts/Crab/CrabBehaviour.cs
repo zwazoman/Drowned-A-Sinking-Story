@@ -50,6 +50,9 @@ public class CrabBehaviour : MonoBehaviour
     void die()
     {
         StopAllCoroutines();
+
+        Debug.LogError("crabe mooooooort");
+        _animator.ResetTrigger("opportunity");
         _animator.SetTrigger("Die");
         _lookAtPlayer = false;
         enabled = false;
