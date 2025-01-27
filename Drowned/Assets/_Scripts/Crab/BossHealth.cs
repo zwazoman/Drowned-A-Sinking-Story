@@ -25,6 +25,15 @@ public class BossHealth : MonoBehaviour
         {
             weakSpot.OnDie += TakeDamage;
         }
+
+        if(OnBossDead!= null)
+        {
+            foreach (Delegate d in OnBossDead.GetInvocationList())
+            {
+                OnBossDead -= (Action)d;
+            }
+        }
+        
     }
 
     private void Start()
@@ -53,6 +62,5 @@ public class BossHealth : MonoBehaviour
     void Die()
     {
         OnBossDead?.Invoke();
-        print("singe");
     }
 }

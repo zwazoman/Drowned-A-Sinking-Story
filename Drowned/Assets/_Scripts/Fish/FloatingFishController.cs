@@ -107,8 +107,8 @@ public class FloatingFishController : MonoBehaviour
 
         AudioManager.Instance.PlaySFXClip(Sounds.Shoot, _volume);
         cam.AddImpulse();
-        Vector3 targetPos;
-        RaycastHit hit;
+        //Vector3 targetPos;
+        //RaycastHit hit;
 
         GameObject bubble = PoolManager.Instance.AccessPool(Pools.Bubble).TakeFromPool(_shootSocket.position, Quaternion.identity);
         bubble.TryGetComponent<Bubble>(out Bubble bubbleScript);

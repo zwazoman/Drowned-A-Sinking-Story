@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Caillou1
+  m_Name: M_Caillou
   m_Shader: {fileID: -6465566751694194690, guid: e9c10ab786fa1894c82db7f7fb703b5f,
     type: 3}
   m_Parent: {fileID: 0}

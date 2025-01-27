@@ -43,12 +43,16 @@ public class CrabBehaviour : MonoBehaviour
     {
         StartCoroutine(Play());
         BossHealth.OnBossDead += die;
+
+        targetPosition = _fishHead.transform.position;
     }
 
     void die()
     {
         StopAllCoroutines();
         _animator.SetTrigger("Die");
+        _lookAtPlayer = false;
+        enabled = false;
     }
 
     public void OnDamageTaken()
