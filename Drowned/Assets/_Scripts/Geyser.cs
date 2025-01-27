@@ -19,11 +19,11 @@ public class Geyser : MonoBehaviour
     void SummonBubble()
     {
         _currentBubble = PoolManager.Instance.AccessPool(Pools.AirBubble).TakeFromPool(_airBubbleSpawnSocket.position, Quaternion.identity);
-        _currentBubble.TryGetComponent(out PoolObject poolObject);
-        poolObject.OnPushedToPool += Spawn;
+        AirBubble bubble = _currentBubble.GetComponent<AirBubble>();
+        bubble.Jeyser = this;
     }
 
-    void Spawn()
+    public void Spawn()
     {
         StartCoroutine(SpawnAirBubble());
     }
@@ -31,8 +31,6 @@ public class Geyser : MonoBehaviour
     IEnumerator SpawnAirBubble()
     {
         yield return new WaitForSeconds(Random.Range(_minWaitTime, _maxWaitTime));
-        _currentBubble.TryGetComponent(out PoolObject poolObject);
-        poolObject.OnPushedToPool -= Spawn;
         SummonBubble();
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AirBubble : MonoBehaviour,IPoolable
 {
+    [HideInInspector] public Geyser Jeyser;
+
     [SerializeField] float _airAmount;
     [SerializeField] float _MagnetTreshold = 25;
     public GameObject bubbleExplosionVFX;
@@ -24,6 +26,8 @@ public class AirBubble : MonoBehaviour,IPoolable
 
     public void ReturnToPool()
     {
+        Jeyser.Spawn();
+
         Destroy(GameObject.Instantiate(bubbleExplosionVFX, transform.position, Quaternion.identity, null), 5);
 
         if (_poolObject == null) Destroy(gameObject); else _poolObject.PushToPool();
