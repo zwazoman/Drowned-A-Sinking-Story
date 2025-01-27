@@ -18,14 +18,24 @@ public class CameraController : MonoBehaviour
     float rotX;
     float rotY;
 
+    
     float salope;
+    Animator animator;
+
+
 
     private void Awake()
     {
-        salope = (Camera.main.transform.position - transform.position).magnitude;
+        animator = GetComponentInChildren<Animator>();
 
+        salope = (animator.transform.position - transform.position).magnitude;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void AddImpulse()
+    {
+        animator.SetTrigger("Play");
     }
 
     // Update is called once per frame
@@ -43,6 +53,8 @@ public class CameraController : MonoBehaviour
 
         //transform.Rotate(Vector3.up, cameraInput.x * Time.deltaTime, Space.World);
         //transform.Rotate(Vector3.right, cameraInput.y * Time.deltaTime, Space.Self);
+
+       
 
         HandleClipping();
     }
@@ -67,11 +79,11 @@ public class CameraController : MonoBehaviour
 
         if(Physics.Raycast(transform.position, -transform.forward, out hit,salope,LayerMask.GetMask("Wall")))
         {
-            Camera.main.transform.position = hit.point + transform.forward;
+            animator.transform.position = hit.point + transform.forward;
         }
         else
         {
-            Camera.main.transform.localPosition = Vector3.forward * -salope;
+            animator.transform.localPosition = Vector3.forward * - (salope);
         }
 
     }

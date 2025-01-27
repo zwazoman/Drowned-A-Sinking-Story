@@ -40,11 +40,11 @@ public class FloatingFishController : MonoBehaviour
 
     MeshRenderer MR;
 
-
+    CameraController cam;
     private void Awake()
     {
         TryGetComponent(out MR);
-
+        cam = FindObjectOfType<CameraController>(); //singleton
         Air = _maxAir;
     }
 
@@ -106,7 +106,7 @@ public class FloatingFishController : MonoBehaviour
         if (!enabled) return;
 
         AudioManager.Instance.PlaySFXClip(Sounds.Shoot, _volume);
-
+        cam.AddImpulse();
         Vector3 targetPos;
         RaycastHit hit;
 
