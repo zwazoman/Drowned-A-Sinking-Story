@@ -33,8 +33,10 @@ public class CrabClaws : MonoBehaviour
         {
             print(health.gameObject);
             Rigidbody rb = health.GetComponentInChildren<Rigidbody>();
-            rb.AddForce(collision.impulse * _pushForce, ForceMode.Impulse);
+
+            rb.AddForce((rb.transform.position- transform.root.GetChild(0).position).normalized * _pushForce, ForceMode.Impulse);
             health.ApplyDamage(_damages);
+            StopAttack();
         }
     }
 }

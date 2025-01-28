@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] Transform _target;
+    [SerializeField] Transform _cameraHolder;
 
     [Header("parameters")]
     [SerializeField] float _smoothTime;
@@ -28,7 +29,7 @@ public class CameraController : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
 
-        salope = (animator.transform.position - transform.position).magnitude;
+        salope = (Camera.main.transform.position - transform.position).magnitude;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -41,7 +42,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.SmoothDamp(transform.position, _target.position, ref vel, _smoothTime);
+        transform.position = Vector3.SmoothDamp(transform.position, _target.position + Vector3.up*5, ref vel, _smoothTime);
 
         rotX += cameraInput.x * _sensibility;
         rotY += -cameraInput.y * _sensibility;
@@ -76,14 +77,15 @@ public class CameraController : MonoBehaviour
     void HandleClipping()
     {
         RaycastHit hit;
-
+        Debug.DrawRay(transform.position, -transform.forward * 100,Color.red);
         if(Physics.Raycast(transform.position, -transform.forward, out hit,salope,LayerMask.GetMask("Wall")))
         {
-            animator.transform.position = hit.point + transform.forward;
+            Debug.Log("putain");
+            _cameraHolder.transform.position = hit.point - transform.forward*3;
         }
         else
         {
-            animator.transform.localPosition = Vector3.forward * - (salope);
+            _cameraHolder.transform.localPosition = Vector3.forward * - (salope);
         }
 
     }
