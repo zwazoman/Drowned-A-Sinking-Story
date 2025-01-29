@@ -17,8 +17,6 @@ public class Bubble : MonoBehaviour,IPoolable
     [SerializeField] float _bulletSpeed;
     [SerializeField] float _initialDamages;
 
-    [SerializeField] float _floatForce;
-
     Vector3 _initialScale;
     float _damages;
 
@@ -28,6 +26,10 @@ public class Bubble : MonoBehaviour,IPoolable
 
     private void Awake()
     {
+        ScaleFactor = 1;
+        SpeedFactor = 1;
+        DamageFactor = 1;
+
         TryGetComponent(out _poolObject);
         TryGetComponent(out _rb);
 
@@ -53,22 +55,46 @@ public class Bubble : MonoBehaviour,IPoolable
         _rb.velocity = Vector3.zero;
 
         _effect.Stop();
+
+        StopCoroutine(DestroyCoroutine());
         if (_poolObject == null) Destroy(gameObject); else _poolObject.PushToPool();
     }
 
     public void OnPulledFromPool()
     {
+        StartCoroutine(DestroyCoroutine());
+
+        print("fonce");
         _effect.Play();
 
         transform.localScale = _initialScale * ScaleFactor;
+        print(ScaleFactor);
+        print(_initialScale);
+        print(_initialScale * ScaleFactor);
         _damages = _initialDamages * DamageFactor;
 
         _rb.AddForce(transform.forward * _bulletSpeed * SpeedFactor,ForceMode.Impulse);
     } 
 
+    IEnumerator DestroyCoroutine()
+    {
+        yield return new WaitForSeconds(10);
+        ReturnToPool();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent<Health>(out Health health)) health.ApplyDamage(DamageFactor);
+        print(other.gameObject.name);
+
+        if (other.gameObject.TryGetComponent<Health>(out Health health)) 
+        {
+            health.ApplyDamage(_damages); 
+        }
+        else if (other.gameObject.layer == 6)
+        {
+            print("fish hit");
+            FishController.Instance.GetComponent<Health>().ApplyDamage(_damages);
+        }
 
         ReturnToPool();
     }

@@ -33,7 +33,7 @@ public class FlipFlop : MonoBehaviour
 
         if (ctx.performed)
         {
-            AudioManager.Instance.PlaySFXClip(Sounds.WaterWhoosh,0.3f);
+            AudioManager.Instance.PlaySFXClip(Sounds.WaterWhoosh,0.5f);
             flip = true;
         }
         else if (ctx.canceled)
@@ -51,7 +51,7 @@ public class FlipFlop : MonoBehaviour
         }
         if(ctx.performed)
         {
-            AudioManager.Instance.PlaySFXClip(Sounds.WaterWhoosh,0.3f);
+            AudioManager.Instance.PlaySFXClip(Sounds.WaterWhoosh,0.5f);
             flop = true;            
         }
         else

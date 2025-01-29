@@ -27,10 +27,11 @@ public class AttackEvent : MonoBehaviour
 
     public void ShootBubbles()
     {
-        Vector3 target = FishController.Instance.gameObject.transform.position;
+        print("shoot");
+        Vector3 target = FishController.Instance.rb1.gameObject.transform.position;
         Vector3 clawToTarget = target - _shootSocket.position;
-        GameObject bubble = PoolManager.Instance.AccessPool(Pools.CrabBubble).TakeFromPool(-_shootSocket.position, Quaternion.identity);
-        bubble.transform.forward = clawToTarget;
+        GameObject bubble = PoolManager.Instance.AccessPool(Pools.CrabBubble).TakeFromPool(_shootSocket.position, Quaternion.identity);
+        bubble.transform.LookAt(target + Vector3.up);
     }
 
     public void ShootBigRayonLaserDeLaMortHIHI()

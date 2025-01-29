@@ -158,7 +158,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.33, y: 0, z: -0.22}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 922212575579763373}
@@ -254,7 +254,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 896
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
@@ -281,7 +281,6 @@ MonoBehaviour:
   DamageFactor: 0
   _bulletSpeed: 300
   _initialDamages: 1
-  _floatForce: 0
 --- !u!114 &-1783314366936960764
 MonoBehaviour:
   m_ObjectHideFlags: 0
