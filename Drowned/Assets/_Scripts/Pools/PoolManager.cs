@@ -5,6 +5,7 @@ public enum Pools
 {
     Bubble,
     AirBubble,
+    CrabBubble
 }
 
 /// <summary>
