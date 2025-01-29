@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Search;
 using UnityEngine;
 
 public class CrabBehaviour : MonoBehaviour
@@ -11,6 +12,7 @@ public class CrabBehaviour : MonoBehaviour
 
     [Header("parameters")]
     [SerializeField] private float _rangeAttackTreshold = 200;
+    [SerializeField] private float _MaxRange = 600;
 
     Vector3 targetPosition;
 
@@ -81,13 +83,16 @@ public class CrabBehaviour : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(2,5));
 
-            _lookAtPlayer = false;
-            if ((transform.position - FishController.Instance.rb1.position).sqrMagnitude < _rangeAttackTreshold * _rangeAttackTreshold)
+            
+            float sqrD = (transform.position - FishController.Instance.rb1.position).sqrMagnitude;
+            if (sqrD < _rangeAttackTreshold * _rangeAttackTreshold)
             {
+                _lookAtPlayer = false;
                 _animator.SetTrigger(_attaquesDePres[Random.Range(0, _attaquesDePres.Length)]);
             }
-            else
+            else if(sqrD < _MaxRange*_MaxRange)
             {
+                _lookAtPlayer = true;
                 _animator.SetTrigger(_attaquesDeLoin[Random.Range(0, _attaquesDeLoin.Length)]);
             }
             yield return 0;
@@ -107,5 +112,8 @@ public class CrabBehaviour : MonoBehaviour
     {
         Gizmos.color = new Color(1,.5f,.5f,.1f);
         Gizmos.DrawSphere(transform.position,_rangeAttackTreshold);
+        
+        Gizmos.color = new Color(.1f,.5f,.7f,.1f);
+        Gizmos.DrawSphere(transform.position, _MaxRange);
     }
 }

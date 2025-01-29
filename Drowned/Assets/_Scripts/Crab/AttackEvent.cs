@@ -31,6 +31,7 @@ public class AttackEvent : MonoBehaviour
         Vector3 target = FishController.Instance.rb1.gameObject.transform.position;
         Vector3 clawToTarget = target - _shootSocket.position;
         GameObject bubble = PoolManager.Instance.AccessPool(Pools.CrabBubble).TakeFromPool(_shootSocket.position, Quaternion.identity);
+        bubble.transform.position = _shootSocket.position;
         bubble.transform.LookAt(target + Vector3.up);
     }
 

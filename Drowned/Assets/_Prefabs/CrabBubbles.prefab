@@ -279,8 +279,9 @@ MonoBehaviour:
   ScaleFactor: 0
   SpeedFactor: 0
   DamageFactor: 0
-  _bulletSpeed: 300
+  _bulletSpeed: 150
   _initialDamages: 1
+  _initialScale: {x: 0, y: 0, z: 0}
 --- !u!114 &-1783314366936960764
 MonoBehaviour:
   m_ObjectHideFlags: 0
